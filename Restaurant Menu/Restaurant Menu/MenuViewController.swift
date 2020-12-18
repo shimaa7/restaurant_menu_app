@@ -12,16 +12,38 @@ import RevealingSplashView
 
 class MenuViewController: UIViewController {
     
+    @IBOutlet weak var menuLabel: UILabel!
+    @IBOutlet weak var categoriesCollectionView: UICollectionView!
+    @IBOutlet weak var previousBtn: UIButton!
+    @IBOutlet weak var nextBtn: UIButton!
+    
     let spinnerView = UIView()
+    var nextPageIndex = 0
+    var offset = 6
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         animateLogo()
+        view.backgroundColor = backgroundScreenColor
+        self.nextBtn.addTarget(self, action: #selector(nextBtnOnClick), for: .touchUpInside)
+        self.previousBtn.addTarget(self, action: #selector(previousBtnOnClick), for: .touchUpInside)
         //setupUI()
     }
-    
+    @objc func nextBtnOnClick(){
+        let counter = categories.count - nextPageIndex * offset
+        if counter > offset {
+        nextPageIndex += 1
+        self.categoriesCollectionView.reloadData()
+        }
+    }
+    @objc func previousBtnOnClick(){
+        if nextPageIndex - 1 >= 0 {
+        nextPageIndex -= 1
+        self.categoriesCollectionView.reloadData()
+        }
+    }
     func setupUI(){
         // set default background color
         view.backgroundColor = backgroundScreenColor
@@ -59,11 +81,31 @@ class MenuViewController: UIViewController {
         //start animation
         revealingSplashView.startAnimation(){
             print("Completed")
-            self.setupUI()
+            //self.setupUI()
 //            let vc = self.storyboard?.instantiateViewController(withIdentifier: "CategoriesViewController") as! CategoriesViewController
 //            self.navigationController?.pushViewController(vc, animated: true)
         }
     }
 }
 
-
+extension MenuViewController: UICollectionViewDataSource, UICollectionViewDelegate{
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        //return categories.count
+        var counter = categories.count - nextPageIndex * offset
+        counter = (counter > offset ) ? offset : counter
+        return counter
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "categories", for: indexPath) as! MenuCollectionViewCell
+        cell.backgroundColor = .white
+        cell.name.text = categories[(nextPageIndex * offset) + indexPath.row]
+        cell.numberOfItems.text = "10 items"
+        return cell
+    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "ProductsViewController") as! ProductsViewController
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+}
