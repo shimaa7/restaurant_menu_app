@@ -108,6 +108,7 @@ extension MenuViewController: UICollectionViewDataSource, UICollectionViewDelega
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "ProductsViewController") as! ProductsViewController
         vc.delegate = self
+        vc.categoryName = categories[(nextPageIndex * offset) + indexPath.row]
         self.navigationController?.pushViewController(vc, animated: true)
     }
     

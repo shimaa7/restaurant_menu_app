@@ -23,6 +23,7 @@ class ProductsViewController: UIViewController {
     
     var nextPageIndex = 0
     var offset = 6
+    var categoryName = "Category"
     
     var delegate: ProductSelectionDelegate!
 
@@ -34,6 +35,7 @@ class ProductsViewController: UIViewController {
         view.backgroundColor = backgroundScreenColor
         self.nextBtn.addTarget(self, action: #selector(nextBtnOnClick), for: .touchUpInside)
         self.previousBtn.addTarget(self, action: #selector(previousBtnOnClick), for: .touchUpInside)
+        categoryNameLabel.text = categoryName
         
         backBtn.addTarget(self, action: #selector(backBtnOnClick), for: .touchUpInside)
         let image = UIImage(named: "right_arrow")?.withRenderingMode(.alwaysTemplate)
