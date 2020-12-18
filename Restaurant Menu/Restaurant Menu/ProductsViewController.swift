@@ -54,7 +54,7 @@ class ProductsViewController: UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
     @objc func nextBtnOnClick(){
-        let counter = categories.count - nextPageIndex * offset
+        let counter = products.count - nextPageIndex * offset
         if counter > offset {
         nextPageIndex += 1
         self.productsCollectionView.reloadData()
@@ -71,7 +71,7 @@ class ProductsViewController: UIViewController {
 
 extension ProductsViewController: UICollectionViewDataSource, UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        var counter = categories.count - nextPageIndex * offset
+        var counter = products.count - nextPageIndex * offset
         counter = (counter > offset ) ? offset : counter
         return counter
     }

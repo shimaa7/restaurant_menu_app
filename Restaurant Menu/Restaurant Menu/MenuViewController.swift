@@ -9,6 +9,8 @@
 import UIKit
 import SCLAlertView
 import RevealingSplashView
+import Alamofire
+import SwiftyJSON
 
 class MenuViewController: UIViewController{
     
@@ -19,10 +21,17 @@ class MenuViewController: UIViewController{
     
     let spinnerView = UIView()
     var nextPageIndex = 0
-    var offset = 6
+    var offset = 20
+    
+    var categoriesAPI = [Category]()
+    var page = 1
+    var isFirstLaunch = true
     
     var test = UIViewController()
     
+    override func viewWillAppear(_ animated: Bool) {
+        getData()
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -34,7 +43,7 @@ class MenuViewController: UIViewController{
         //setupUI()
     }
     @objc func nextBtnOnClick(){
-        let counter = categories.count - nextPageIndex * offset
+        let counter = categoriesAPI.count - nextPageIndex * offset
         if counter > offset {
         nextPageIndex += 1
         self.categoriesCollectionView.reloadData()
@@ -93,22 +102,26 @@ class MenuViewController: UIViewController{
 extension MenuViewController: UICollectionViewDataSource, UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         //return categories.count
-        var counter = categories.count - nextPageIndex * offset
+        if isFirstLaunch{
+            return 0
+        }else{
+        var counter = categoriesAPI.count - nextPageIndex * offset
         counter = (counter > offset ) ? offset : counter
         return counter
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "categories", for: indexPath) as! MenuCollectionViewCell
         cell.backgroundColor = .white
-        cell.name.text = categories[(nextPageIndex * offset) + indexPath.row]
+        cell.name.text = categoriesAPI[(nextPageIndex * offset) + indexPath.row].name
         cell.numberOfItems.text = "10 items"
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "ProductsViewController") as! ProductsViewController
         vc.delegate = self
-        vc.categoryName = categories[(nextPageIndex * offset) + indexPath.row]
+        vc.categoryName = categoriesAPI[(nextPageIndex * offset) + indexPath.row].name ?? "Category"
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -156,4 +169,56 @@ extension MenuViewController: ProductSelectionDelegate{
     }
     
     
+}
+extension MenuViewController{
+    
+    func getData(){
+        
+        let url = "https://api.foodics.dev/v5/categories"
+              
+        let headers: HTTPHeaders = [
+            "accept": "application/json",
+            "Authorization": "Bearer \(token)",
+        ]
+
+        let params: Parameters = [
+            "page": page,
+        ]
+        
+        AF.request(url, method: .get, parameters: params, headers: headers).responseJSON {
+            
+            response in
+            
+            //print(response)
+            
+            switch response.result {
+            case .success(let value):
+                let json = JSON(value)
+                //print(json)
+                let data = json["data"].arrayValue
+                let meta = json["meta"].dictionary
+                
+                for category in data{
+                    self.categoriesAPI.append(Category(id: category["id"].stringValue,
+                                                  name: category["name"].stringValue))
+                }
+                print(self.categoriesAPI.count)
+                if meta?["current_page"]?.intValue == meta?["last_page"]?.intValue{
+                    self.page = 1
+                    self.isFirstLaunch = false
+                    self.categoriesCollectionView.reloadData()
+                    print("Donnnnne")
+                }else{
+                    print("NOOOO")
+                    self.page += 1
+                    self.getData()
+                }
+
+            case .failure(let error):
+                print(error)
+            }
+
+        }
+        
+    }
 }

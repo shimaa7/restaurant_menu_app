@@ -20,6 +20,7 @@
 		D4A19CA5258D3E87005C0EC3 /* ProductsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A19CA4258D3E87005C0EC3 /* ProductsViewController.swift */; };
 		D4A19CA7258D5ECB005C0EC3 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A19CA6258D5ECB005C0EC3 /* Category.swift */; };
 		D4A19CA9258D606D005C0EC3 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A19CA8258D606D005C0EC3 /* Product.swift */; };
+		D4A19CAB258D61D1005C0EC3 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A19CAA258D61D1005C0EC3 /* API.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +40,7 @@
 		D4A19CA4258D3E87005C0EC3 /* ProductsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsViewController.swift; sourceTree = "<group>"; };
 		D4A19CA6258D5ECB005C0EC3 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		D4A19CA8258D606D005C0EC3 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
+		D4A19CAA258D61D1005C0EC3 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		DE9464C02C0D145314DFFF04 /* Pods-Restaurant Menu.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Restaurant Menu.debug.xcconfig"; path = "Target Support Files/Pods-Restaurant Menu/Pods-Restaurant Menu.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -105,6 +107,7 @@
 				D4A19CA4258D3E87005C0EC3 /* ProductsViewController.swift */,
 				D4A19CA6258D5ECB005C0EC3 /* Category.swift */,
 				D4A19CA8258D606D005C0EC3 /* Product.swift */,
+				D4A19CAA258D61D1005C0EC3 /* API.swift */,
 			);
 			path = "Restaurant Menu";
 			sourceTree = "<group>";
@@ -223,6 +226,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D4A19CAB258D61D1005C0EC3 /* API.swift in Sources */,
 				D4A19CA3258D3AB7005C0EC3 /* ProductsCollectionViewCell.swift in Sources */,
 				D4A19C85258CE373005C0EC3 /* AppDelegate.swift in Sources */,
 				D4A19CA5258D3E87005C0EC3 /* ProductsViewController.swift in Sources */,

@@ -9,8 +9,6 @@
 import Foundation
 
 struct Category{
-    var id: Int?
+    var id: String?
     var name: String?
 }
-
-
