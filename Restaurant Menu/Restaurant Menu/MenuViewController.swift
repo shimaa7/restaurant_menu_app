@@ -115,6 +115,43 @@ extension MenuViewController: UICollectionViewDataSource, UICollectionViewDelega
 extension MenuViewController: ProductSelectionDelegate{
     func selectedProduct(product: String) {
             print("4444", product)
+        let appearance = SCLAlertView.SCLAppearance(
+            kTitleFont: UIFont(name: "HelveticaNeue", size: 20)!,
+            kTextFont: UIFont(name: "HelveticaNeue", size: 14)!,
+            kButtonFont: UIFont(name: "HelveticaNeue-Bold", size: 14)!,
+            showCloseButton: false
+        )
+
+        // Initialize SCLAlertView using custom Appearance
+        let alert = SCLAlertView(appearance: appearance)
+
+        // Creat the subview
+        let subview = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height * 0.3))
+
+        // Add textfield 1
+        let imageView = UIImageView(frame: CGRect(x: subview.frame.width * 0.4 / 6.5, y: 20, width: subview.frame.width * 0.4, height: subview.frame.width * 0.4))
+        imageView.image = #imageLiteral(resourceName: "cutlery")
+        subview.addSubview(imageView)
+        // Add textfield 2
+        let label = UILabel(frame: CGRect(x: subview.frame.width * 0.4 / 6.5, y: 30 + subview.frame.width * 0.4,width: subview.frame.width * 0.4, height: subview.frame.width * 0.1))
+        label.text = product
+        label.textAlignment = .center
+        subview.addSubview(label)
+        // Add textfield 2
+        let label2 = UILabel(frame: CGRect(x: subview.frame.width * 0.4 / 6.5, y: 60 + subview.frame.width * 0.4,width: subview.frame.width * 0.4, height: subview.frame.width * 0.1))
+        label2.text = "500 EGP"
+        label2.font = UIFont(name: "HelveticaNeue", size: 15)
+        label2.textColor = .gray
+        label2.textAlignment = .center
+        subview.addSubview(label2)
+        
+        // Add the subview to the alert's UI property
+        alert.customSubview = subview
+        alert.addButton("Done") {
+            print("Logged in")
+        }
+
+        alert.showSuccess("", subTitle: "")
     }
     
     
