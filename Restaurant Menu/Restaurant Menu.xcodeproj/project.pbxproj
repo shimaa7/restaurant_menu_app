@@ -12,10 +12,11 @@
 		D4A19C87258CE373005C0EC3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A19C86258CE373005C0EC3 /* SceneDelegate.swift */; };
 		D4A19C8C258CE373005C0EC3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D4A19C8A258CE373005C0EC3 /* Main.storyboard */; };
 		D4A19C8E258CE376005C0EC3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D4A19C8D258CE376005C0EC3 /* Assets.xcassets */; };
-		D4A19C99258D0889005C0EC3 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A19C98258D0889005C0EC3 /* SplashViewController.swift */; };
 		D4A19C9B258D0BBE005C0EC3 /* Constans.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A19C9A258D0BBE005C0EC3 /* Constans.swift */; };
-		D4A19C9D258D0F86005C0EC3 /* CategoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A19C9C258D0F86005C0EC3 /* CategoriesViewController.swift */; };
+		D4A19C9D258D0F86005C0EC3 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A19C9C258D0F86005C0EC3 /* MenuViewController.swift */; };
 		D4A19C9F258D1752005C0EC3 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A19C9E258D1752005C0EC3 /* Extensions.swift */; };
+		D4A19CA1258D3A84005C0EC3 /* MenuCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A19CA0258D3A84005C0EC3 /* MenuCollectionViewCell.swift */; };
+		D4A19CA3258D3AB7005C0EC3 /* ProductsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A19CA2258D3AB7005C0EC3 /* ProductsCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,10 +28,11 @@
 		D4A19C8B258CE373005C0EC3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D4A19C8D258CE376005C0EC3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D4A19C92258CE376005C0EC3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D4A19C98258D0889005C0EC3 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		D4A19C9A258D0BBE005C0EC3 /* Constans.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constans.swift; sourceTree = "<group>"; };
-		D4A19C9C258D0F86005C0EC3 /* CategoriesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesViewController.swift; sourceTree = "<group>"; };
+		D4A19C9C258D0F86005C0EC3 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		D4A19C9E258D1752005C0EC3 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		D4A19CA0258D3A84005C0EC3 /* MenuCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCollectionViewCell.swift; sourceTree = "<group>"; };
+		D4A19CA2258D3AB7005C0EC3 /* ProductsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsCollectionViewCell.swift; sourceTree = "<group>"; };
 		DE9464C02C0D145314DFFF04 /* Pods-Restaurant Menu.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Restaurant Menu.debug.xcconfig"; path = "Target Support Files/Pods-Restaurant Menu/Pods-Restaurant Menu.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -89,10 +91,11 @@
 				D4A19C8A258CE373005C0EC3 /* Main.storyboard */,
 				D4A19C8D258CE376005C0EC3 /* Assets.xcassets */,
 				D4A19C92258CE376005C0EC3 /* Info.plist */,
-				D4A19C98258D0889005C0EC3 /* SplashViewController.swift */,
 				D4A19C9A258D0BBE005C0EC3 /* Constans.swift */,
-				D4A19C9C258D0F86005C0EC3 /* CategoriesViewController.swift */,
+				D4A19C9C258D0F86005C0EC3 /* MenuViewController.swift */,
 				D4A19C9E258D1752005C0EC3 /* Extensions.swift */,
+				D4A19CA0258D3A84005C0EC3 /* MenuCollectionViewCell.swift */,
+				D4A19CA2258D3AB7005C0EC3 /* ProductsCollectionViewCell.swift */,
 			);
 			path = "Restaurant Menu";
 			sourceTree = "<group>";
@@ -211,12 +214,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D4A19CA3258D3AB7005C0EC3 /* ProductsCollectionViewCell.swift in Sources */,
 				D4A19C85258CE373005C0EC3 /* AppDelegate.swift in Sources */,
 				D4A19C9F258D1752005C0EC3 /* Extensions.swift in Sources */,
 				D4A19C87258CE373005C0EC3 /* SceneDelegate.swift in Sources */,
 				D4A19C9B258D0BBE005C0EC3 /* Constans.swift in Sources */,
-				D4A19C99258D0889005C0EC3 /* SplashViewController.swift in Sources */,
-				D4A19C9D258D0F86005C0EC3 /* CategoriesViewController.swift in Sources */,
+				D4A19C9D258D0F86005C0EC3 /* MenuViewController.swift in Sources */,
+				D4A19CA1258D3A84005C0EC3 /* MenuCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
