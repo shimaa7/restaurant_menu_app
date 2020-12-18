@@ -8,6 +8,11 @@
 
 import UIKit
 
+protocol ProductSelectionDelegate{
+
+    func selectedProduct(product: String)
+}
+
 class ProductsViewController: UIViewController {
 
     @IBOutlet weak var backBtn: UIButton!
@@ -19,6 +24,8 @@ class ProductsViewController: UIViewController {
     var nextPageIndex = 0
     var offset = 6
     
+    var delegate: ProductSelectionDelegate!
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -72,6 +79,10 @@ extension ProductsViewController: UICollectionViewDataSource, UICollectionViewDe
         cell.backgroundColor = .white
         cell.name.text = products[(nextPageIndex * offset) + indexPath.row]
         return cell
+    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.delegate?.selectedProduct(product: products[(nextPageIndex * offset) + indexPath.row])
+        self.navigationController?.popViewController(animated: true)
     }
     
     

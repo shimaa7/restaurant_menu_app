@@ -10,7 +10,7 @@ import UIKit
 import SCLAlertView
 import RevealingSplashView
 
-class MenuViewController: UIViewController {
+class MenuViewController: UIViewController{
     
     @IBOutlet weak var menuLabel: UILabel!
     @IBOutlet weak var categoriesCollectionView: UICollectionView!
@@ -20,6 +20,8 @@ class MenuViewController: UIViewController {
     let spinnerView = UIView()
     var nextPageIndex = 0
     var offset = 6
+    
+    var test = UIViewController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -105,7 +107,15 @@ extension MenuViewController: UICollectionViewDataSource, UICollectionViewDelega
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "ProductsViewController") as! ProductsViewController
+        vc.delegate = self
         self.navigationController?.pushViewController(vc, animated: true)
     }
+    
+}
+extension MenuViewController: ProductSelectionDelegate{
+    func selectedProduct(product: String) {
+            print("4444", product)
+    }
+    
     
 }
