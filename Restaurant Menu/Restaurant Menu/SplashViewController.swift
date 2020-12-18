@@ -29,6 +29,11 @@ class SplashViewController: UIViewController {
         //Starts animation
         revealingSplashView.startAnimation(){
             print("Completed")
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "CategoriesViewController") as! CategoriesViewController
+            self.navigationController?.pushViewController(vc, animated: true)
+//        let targetVC = self.navigationController?.viewControllers.first(where: {$0 is CategoriesViewController})
+//        _ = self.navigationController?.popToViewController(targetVC!, animated: true)
+        
         }
     }
 
