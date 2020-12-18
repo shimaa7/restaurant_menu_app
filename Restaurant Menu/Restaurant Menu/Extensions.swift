@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-// Spinner View startSpinner(), stopSpinner()
+// Spinner View startSpinner(onView: UIView), stopSpinner(onView: UIView)
 extension UIViewController {
         
     func startSpinner(onView : UIView, message: String) {

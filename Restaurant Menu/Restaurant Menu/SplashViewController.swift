@@ -18,22 +18,19 @@ class SplashViewController: UIViewController {
     }
     
     func animateLogo(){
-        //Initialize a revealing Splash with the iconImage, the initial size and the background color
+        //initialize a revealing splash with the iconImage, the initial size and the background color
         let revealingSplashView = RevealingSplashView(iconImage: UIImage(named: "logo1")!,iconInitialSize: CGSize(width: view.frame.width * 0.7, height: view.frame.width * 0.7), backgroundColor: backgroundScreenColor)
         
         revealingSplashView.animationType = SplashAnimationType.woobleAndZoomOut
 
-        //Adds the revealing splash view as a subview
+        //add the revealing splash view as a subview
         self.view.addSubview(revealingSplashView)
 
-        //Starts animation
+        //start animation
         revealingSplashView.startAnimation(){
             print("Completed")
             let vc = self.storyboard?.instantiateViewController(withIdentifier: "CategoriesViewController") as! CategoriesViewController
             self.navigationController?.pushViewController(vc, animated: true)
-//        let targetVC = self.navigationController?.viewControllers.first(where: {$0 is CategoriesViewController})
-//        _ = self.navigationController?.popToViewController(targetVC!, animated: true)
-        
         }
     }
 
