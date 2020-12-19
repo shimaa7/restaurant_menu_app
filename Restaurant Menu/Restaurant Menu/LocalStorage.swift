@@ -24,6 +24,8 @@ protocol LocalStorageProtocol {
     @discardableResult func delete<T: Object>(_ object: T) -> Bool
 
     @discardableResult func flush() -> Bool
+    @discardableResult func getFileURL() -> URL
+
 }
 
 class LocalStorage: LocalStorageProtocol {
@@ -40,6 +42,12 @@ class LocalStorage: LocalStorageProtocol {
             print("Default realm init failed: ", error)
         }
         return nil
+    }
+    
+    func getFileURL() -> URL{
+        guard let defaultPath: URL = Realm.Configuration.defaultConfiguration.fileURL else
+        { return URL(string: "")! }
+        return defaultPath
     }
     
     func object<T: Object>() -> T? {

@@ -26,6 +26,7 @@ class ProductsViewController: UIViewController {
     var categoryName = "Category"
     
     var products = [Product]()
+    var productsViewModel = [ProductViewModel]()
     
     var delegate: ProductSelectionDelegate!
 
@@ -85,10 +86,12 @@ extension ProductsViewController: UICollectionViewDataSource, UICollectionViewDe
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "products", for: indexPath) as! ProductsCollectionViewCell
-        let product = products[(nextPageIndex * offset) + indexPath.row]
-        cell.backgroundColor = .white
-        cell.name.text = product.name
-        cell.image.downloaded(from: product.imageURL ?? "")
+        //let product = products[(nextPageIndex * offset) + indexPath.row]
+        let productViewModel = productsViewModel[(nextPageIndex * offset) + indexPath.row]
+        //cell.backgroundColor = .white
+//        cell.name.text = product.name
+//        cell.image.downloaded(from: product.imageURL ?? "")
+        cell.productViewModel = productViewModel
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

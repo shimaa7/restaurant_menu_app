@@ -26,7 +26,9 @@ class MenuViewController: UIViewController{
     var offset = 20
     
     var categoriesAPI = [Category]()
+    var categoriesViewModel = [CategoryViewModel]()
     var productsAPI = [Product]()
+    var productsViewModel = [ProductViewModel]()
     var page = 1
     
     var test = UIViewController()
@@ -69,12 +71,14 @@ class MenuViewController: UIViewController{
         }else{
             // show Loading spinner
             print("EEEEEE")
+            print(storage.getFileURL())
             startSpinner(onView: spinnerView, message: "Loading menu")
 //            self.nextBtn.isUserInteractionEnabled = false
 //            self.previousBtn.isUserInteractionEnabled = false
             self.categoriesAPI = storage.objects()
             self.productsAPI = storage.objects()
-            print(self.categoriesAPI.count)
+            self.categoriesViewModel = self.categoriesAPI.map({return CategoryViewModel(category: $0)})
+            //self.productsViewModel = self.productsAPI.map({return ProductViewModel(product: $0)})
             self.categoriesCollectionView.reloadData()
             stopSpinner(onView: spinnerView)
         }
@@ -144,9 +148,10 @@ extension MenuViewController: UICollectionViewDataSource, UICollectionViewDelega
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "categories", for: indexPath) as! MenuCollectionViewCell
-        cell.backgroundColor = .white
-        cell.name.text = categoriesAPI[(nextPageIndex * offset) + indexPath.row].name
-        cell.numberOfItems.text = "10 items"
+        //cell.backgroundColor = .white
+        //cell.name.text = categoriesAPI[(nextPageIndex * offset) + indexPath.row].name
+        let categoryViewModel = self.categoriesViewModel[(nextPageIndex * offset) + indexPath.row]
+        cell.categoryViewModel = categoryViewModel
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -155,6 +160,14 @@ extension MenuViewController: UICollectionViewDataSource, UICollectionViewDelega
         vc.categoryName = categoriesAPI[(nextPageIndex * offset) + indexPath.row].name ?? "Category"
         vc.products = self.productsAPI.filter({$0.categoryID == categoriesAPI[(nextPageIndex * offset) + indexPath.row].id
         })
+        self.productsViewModel = self.productsAPI.map({
+            if $0.categoryID == categoriesAPI[(nextPageIndex * offset) + indexPath.row].id{
+                return ProductViewModel(product: $0)
+            }else{
+                return ProductViewModel(product: Product())
+            }
+        })
+        vc.productsViewModel = self.productsViewModel.filter({ $0 != ProductViewModel(product: Product()) })
         self.navigationController?.pushViewController(vc, animated: true)
     }
     

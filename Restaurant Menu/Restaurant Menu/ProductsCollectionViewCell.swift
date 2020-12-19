@@ -12,4 +12,12 @@ class ProductsCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var image: UIImageView!
     @IBOutlet weak var name: UILabel!
     
+    var productViewModel: ProductViewModel! {
+        didSet{
+            backgroundColor = .white
+            name.text = productViewModel.name
+            image.downloaded(from: productViewModel.imageURL)
+        }
+    }
+    
 }

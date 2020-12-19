@@ -67,13 +67,13 @@
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Category 1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kcX-jH-Jcu">
-                                                            <rect key="frame" x="87" y="8" width="234" height="27.5"/>
-                                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                                            <rect key="frame" x="89" y="19.5" width="232" height="27"/>
+                                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="25"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1500 items" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u5g-XA-ZeD">
-                                                            <rect key="frame" x="87" y="35.5" width="234" height="13.5"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u5g-XA-ZeD">
+                                                            <rect key="frame" x="87" y="46.5" width="234" height="16.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
@@ -84,11 +84,10 @@
                                                         <constraint firstItem="kcX-jH-Jcu" firstAttribute="height" secondItem="vxB-4o-3rx" secondAttribute="height" multiplier="0.3" id="3mt-Cp-7bw"/>
                                                         <constraint firstAttribute="trailing" secondItem="kcX-jH-Jcu" secondAttribute="trailing" constant="8" id="E3w-PB-CA5"/>
                                                         <constraint firstItem="aKP-um-06T" firstAttribute="height" secondItem="vxB-4o-3rx" secondAttribute="height" multiplier="0.15" id="Fwz-qC-HcI"/>
-                                                        <constraint firstItem="u5g-XA-ZeD" firstAttribute="height" secondItem="kcX-jH-Jcu" secondAttribute="height" multiplier="0.5" id="QhQ-hw-YLJ"/>
+                                                        <constraint firstItem="u5g-XA-ZeD" firstAttribute="height" secondItem="kcX-jH-Jcu" secondAttribute="height" multiplier="0.6" id="QhQ-hw-YLJ"/>
                                                         <constraint firstAttribute="trailing" secondItem="aKP-um-06T" secondAttribute="trailing" constant="15" id="UMM-s3-gD9"/>
                                                         <constraint firstAttribute="trailing" secondItem="u5g-XA-ZeD" secondAttribute="trailing" constant="8" id="f2T-7s-gFJ"/>
                                                         <constraint firstItem="u5g-XA-ZeD" firstAttribute="top" secondItem="kcX-jH-Jcu" secondAttribute="bottom" id="jUe-ih-cmE"/>
-                                                        <constraint firstItem="kcX-jH-Jcu" firstAttribute="top" secondItem="vxB-4o-3rx" secondAttribute="top" constant="8" id="jZY-EQ-5vl"/>
                                                         <constraint firstAttribute="bottom" secondItem="aKP-um-06T" secondAttribute="bottom" constant="15" id="jzG-tw-Rlh"/>
                                                     </constraints>
                                                 </view>
@@ -109,7 +108,8 @@
                                             <constraint firstItem="3SV-B3-CTQ" firstAttribute="width" secondItem="4Up-UH-JIB" secondAttribute="width" multiplier="0.25" id="Q2Z-wI-M60"/>
                                             <constraint firstItem="vxB-4o-3rx" firstAttribute="top" secondItem="4Up-UH-JIB" secondAttribute="top" constant="25" id="n6Q-4k-PVo"/>
                                             <constraint firstAttribute="trailing" secondItem="vxB-4o-3rx" secondAttribute="trailing" constant="20" id="s0g-iB-Vw7"/>
-                                            <constraint firstItem="kcX-jH-Jcu" firstAttribute="leading" secondItem="3SV-B3-CTQ" secondAttribute="trailing" constant="8" id="sbl-mR-7Xs"/>
+                                            <constraint firstItem="kcX-jH-Jcu" firstAttribute="leading" secondItem="3SV-B3-CTQ" secondAttribute="trailing" constant="10" id="sbl-mR-7Xs"/>
+                                            <constraint firstItem="kcX-jH-Jcu" firstAttribute="centerY" secondItem="3SV-B3-CTQ" secondAttribute="centerY" id="sxX-2n-Uet"/>
                                         </constraints>
                                         <connections>
                                             <outlet property="icon" destination="3SV-B3-CTQ" id="gCz-Kz-xR0"/>
