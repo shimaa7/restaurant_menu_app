@@ -24,14 +24,12 @@ class MenuViewController: UIViewController{
     var offset = 20
     
     var categoriesAPI = [Category]()
+    var productsAPI = [Product]()
     var page = 1
     var isFirstLaunch = true
     
     var test = UIViewController()
     
-    override func viewWillAppear(_ animated: Bool) {
-        getData()
-    }
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -61,19 +59,21 @@ class MenuViewController: UIViewController{
         
         // show download spinner
         startSpinner(onView: spinnerView, message: "Downloading menu")
+        
+        getCategoriesData()
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-            self.stopSpinner(onView: self.spinnerView)
-            
-            let appearance = SCLAlertView.SCLAppearance(
-                showCloseButton: false
-            )
-            let alertView = SCLAlertView(appearance: appearance)
-            
-            alertView.addButton("Retry", target:self, selector:#selector(self.retry))
-            alertView.showError("Failed", subTitle: "Failed to download the menu") // Error
-    
-        }
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+//            self.stopSpinner(onView: self.spinnerView)
+//
+//            let appearance = SCLAlertView.SCLAppearance(
+//                showCloseButton: false
+//            )
+//            let alertView = SCLAlertView(appearance: appearance)
+//
+//            alertView.addButton("Retry", target:self, selector:#selector(self.retry))
+//            alertView.showError("Failed", subTitle: "Failed to download the menu") // Error
+//
+//        }
     }
     
     @objc func retry(){
@@ -92,7 +92,7 @@ class MenuViewController: UIViewController{
         //start animation
         revealingSplashView.startAnimation(){
             print("Completed")
-            //self.setupUI()
+            self.setupUI()
 //            let vc = self.storyboard?.instantiateViewController(withIdentifier: "CategoriesViewController") as! CategoriesViewController
 //            self.navigationController?.pushViewController(vc, animated: true)
         }
@@ -122,13 +122,14 @@ extension MenuViewController: UICollectionViewDataSource, UICollectionViewDelega
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "ProductsViewController") as! ProductsViewController
         vc.delegate = self
         vc.categoryName = categoriesAPI[(nextPageIndex * offset) + indexPath.row].name ?? "Category"
+        vc.products = self.productsAPI.filter({$0.categoryID == categoriesAPI[(nextPageIndex * offset) + indexPath.row].id
+        })
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
 }
 extension MenuViewController: ProductSelectionDelegate{
-    func selectedProduct(product: String) {
-            print("4444", product)
+    func selectedProduct(product: Product) {
         let appearance = SCLAlertView.SCLAppearance(
             kTitleFont: UIFont(name: "HelveticaNeue", size: 20)!,
             kTextFont: UIFont(name: "HelveticaNeue", size: 14)!,
@@ -145,15 +146,17 @@ extension MenuViewController: ProductSelectionDelegate{
         // Add textfield 1
         let imageView = UIImageView(frame: CGRect(x: subview.frame.width * 0.4 / 6.5, y: 20, width: subview.frame.width * 0.4, height: subview.frame.width * 0.4))
         imageView.image = #imageLiteral(resourceName: "cutlery")
+        imageView.downloaded(from: product.imageURL ?? "")
+
         subview.addSubview(imageView)
         // Add textfield 2
         let label = UILabel(frame: CGRect(x: subview.frame.width * 0.4 / 6.5, y: 30 + subview.frame.width * 0.4,width: subview.frame.width * 0.4, height: subview.frame.width * 0.1))
-        label.text = product
+        label.text = product.name
         label.textAlignment = .center
         subview.addSubview(label)
         // Add textfield 2
         let label2 = UILabel(frame: CGRect(x: subview.frame.width * 0.4 / 6.5, y: 60 + subview.frame.width * 0.4,width: subview.frame.width * 0.4, height: subview.frame.width * 0.1))
-        label2.text = "500 EGP"
+        label2.text = "\(product.price ?? 0) EGP"
         label2.font = UIFont(name: "HelveticaNeue", size: 15)
         label2.textColor = .gray
         label2.textAlignment = .center
@@ -172,7 +175,7 @@ extension MenuViewController: ProductSelectionDelegate{
 }
 extension MenuViewController{
     
-    func getData(){
+    func getCategoriesData(){
         
         let url = "https://api.foodics.dev/v5/categories"
               
@@ -205,13 +208,65 @@ extension MenuViewController{
                 print(self.categoriesAPI.count)
                 if meta?["current_page"]?.intValue == meta?["last_page"]?.intValue{
                     self.page = 1
-                    self.isFirstLaunch = false
-                    self.categoriesCollectionView.reloadData()
+                    //self.isFirstLaunch = false
+                    //self.categoriesCollectionView.reloadData()
+                    self.getProductsData()
                     print("Donnnnne")
                 }else{
                     print("NOOOO")
                     self.page += 1
-                    self.getData()
+                    self.getCategoriesData()
+                }
+
+            case .failure(let error):
+                print(error)
+            }
+
+        }
+        
+    }
+    
+    func getProductsData(){
+        
+        let url = "https://api.foodics.dev/v5/products?include=category"
+              
+        let headers: HTTPHeaders = [
+            "accept": "application/json",
+            "Authorization": "Bearer \(token)",
+        ]
+
+        let params: Parameters = [
+            "page": page,
+        ]
+        
+        AF.request(url, method: .get, parameters: params, headers: headers).responseJSON {
+            
+            response in
+            
+            //print(response)
+            
+            switch response.result {
+            case .success(let value):
+                let json = JSON(value)
+                //print(json)
+                let data = json["data"].arrayValue
+                let meta = json["meta"].dictionary
+                
+                for product in data{
+                    let category = product["category"].dictionary
+                    self.productsAPI.append(Product(id: product["id"].stringValue, name: product["name"].stringValue, categoryID: category?["id"]?.stringValue, price: product["price"].doubleValue, imageURL: product["image"].stringValue))
+                }
+                print(self.productsAPI.count)
+                if meta?["current_page"]?.intValue == meta?["last_page"]?.intValue{
+                    self.page = 1
+                    self.isFirstLaunch = false
+                    self.stopSpinner(onView: self.spinnerView)
+                    self.categoriesCollectionView.reloadData()
+                    print("DonnnnnePP")
+                }else{
+                    print("NOOOOPP")
+                    self.page += 1
+                    self.getProductsData()
                 }
 
             case .failure(let error):

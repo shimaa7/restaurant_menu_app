@@ -11,7 +11,7 @@ import Foundation
 struct Product {
     var id: String?
     var name: String?
-    var category: Category?
-    var price: String?
+    var categoryID: String?
+    var price: Double?
     var imageURL: String?
 }

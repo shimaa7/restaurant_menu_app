@@ -10,7 +10,7 @@ import UIKit
 
 protocol ProductSelectionDelegate{
 
-    func selectedProduct(product: String)
+    func selectedProduct(product: Product)
 }
 
 class ProductsViewController: UIViewController {
@@ -24,6 +24,8 @@ class ProductsViewController: UIViewController {
     var nextPageIndex = 0
     var offset = 6
     var categoryName = "Category"
+    
+    var products = [Product]()
     
     var delegate: ProductSelectionDelegate!
 
@@ -78,8 +80,10 @@ extension ProductsViewController: UICollectionViewDataSource, UICollectionViewDe
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "products", for: indexPath) as! ProductsCollectionViewCell
+        let product = products[(nextPageIndex * offset) + indexPath.row]
         cell.backgroundColor = .white
-        cell.name.text = products[(nextPageIndex * offset) + indexPath.row]
+        cell.name.text = product.name
+        cell.image.downloaded(from: product.imageURL ?? "")
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

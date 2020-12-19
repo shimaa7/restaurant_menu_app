@@ -26,15 +26,15 @@ let token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjlhZjhkYjhiYzQ2ZDNmNjk
 //"Ten Category",
 //]
 
-var products = [
-"One Product",
-"Two Product",
-"Three Product",
-"Four Product",
-"Five Product",
-"Six Product",
-"Seven Product",
-"Eight Product",
-"Nine Product",
-"Ten Product",
-]
+//var products = [
+//"One Product",
+//"Two Product",
+//"Three Product",
+//"Four Product",
+//"Five Product",
+//"Six Product",
+//"Seven Product",
+//"Eight Product",
+//"Nine Product",
+//"Ten Product",
+//]
