@@ -21,6 +21,7 @@
 		D4A19CA7258D5ECB005C0EC3 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A19CA6258D5ECB005C0EC3 /* Category.swift */; };
 		D4A19CA9258D606D005C0EC3 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A19CA8258D606D005C0EC3 /* Product.swift */; };
 		D4A19CAB258D61D1005C0EC3 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A19CAA258D61D1005C0EC3 /* API.swift */; };
+		D4A19CAD258DEE71005C0EC3 /* LocalStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A19CAC258DEE71005C0EC3 /* LocalStorage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +42,7 @@
 		D4A19CA6258D5ECB005C0EC3 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		D4A19CA8258D606D005C0EC3 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		D4A19CAA258D61D1005C0EC3 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		D4A19CAC258DEE71005C0EC3 /* LocalStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalStorage.swift; sourceTree = "<group>"; };
 		DE9464C02C0D145314DFFF04 /* Pods-Restaurant Menu.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Restaurant Menu.debug.xcconfig"; path = "Target Support Files/Pods-Restaurant Menu/Pods-Restaurant Menu.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -108,6 +110,7 @@
 				D4A19CA6258D5ECB005C0EC3 /* Category.swift */,
 				D4A19CA8258D606D005C0EC3 /* Product.swift */,
 				D4A19CAA258D61D1005C0EC3 /* API.swift */,
+				D4A19CAC258DEE71005C0EC3 /* LocalStorage.swift */,
 			);
 			path = "Restaurant Menu";
 			sourceTree = "<group>";
@@ -235,6 +238,7 @@
 				D4A19C9B258D0BBE005C0EC3 /* Constans.swift in Sources */,
 				D4A19CA7258D5ECB005C0EC3 /* Category.swift in Sources */,
 				D4A19CA9258D606D005C0EC3 /* Product.swift in Sources */,
+				D4A19CAD258DEE71005C0EC3 /* LocalStorage.swift in Sources */,
 				D4A19C9D258D0F86005C0EC3 /* MenuViewController.swift in Sources */,
 				D4A19CA1258D3A84005C0EC3 /* MenuCollectionViewCell.swift in Sources */,
 			);

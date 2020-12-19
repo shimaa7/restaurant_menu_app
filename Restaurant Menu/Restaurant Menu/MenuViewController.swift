@@ -11,6 +11,7 @@ import SCLAlertView
 import RevealingSplashView
 import Alamofire
 import SwiftyJSON
+import RealmSwift
 
 class MenuViewController: UIViewController{
     
@@ -19,6 +20,7 @@ class MenuViewController: UIViewController{
     @IBOutlet weak var previousBtn: UIButton!
     @IBOutlet weak var nextBtn: UIButton!
     
+    let storage: LocalStorageProtocol = LocalStorage()
     let spinnerView = UIView()
     var nextPageIndex = 0
     var offset = 20
@@ -39,6 +41,7 @@ class MenuViewController: UIViewController{
         self.nextBtn.addTarget(self, action: #selector(nextBtnOnClick), for: .touchUpInside)
         self.previousBtn.addTarget(self, action: #selector(previousBtnOnClick), for: .touchUpInside)
         //setupUI()
+        
     }
     @objc func nextBtnOnClick(){
         let counter = categoriesAPI.count - nextPageIndex * offset
@@ -169,7 +172,7 @@ extension MenuViewController: ProductSelectionDelegate{
         subview.addSubview(label)
         // Add textfield 2
         let label2 = UILabel(frame: CGRect(x: subview.frame.width * 0.4 / 6.5, y: 60 + subview.frame.width * 0.4,width: subview.frame.width * 0.4, height: subview.frame.width * 0.1))
-        label2.text = "\(product.price ?? 0) EGP"
+        label2.text = "\(product.price) EGP"
         label2.font = UIFont(name: "HelveticaNeue", size: 15)
         label2.textColor = .gray
         label2.textAlignment = .center
@@ -280,6 +283,8 @@ extension MenuViewController{
                     self.nextBtn.isUserInteractionEnabled = true
                     self.previousBtn.isUserInteractionEnabled = true
                     self.categoriesCollectionView.reloadData()
+                    self.storage.write(self.categoriesAPI)
+                    self.storage.write(self.productsAPI)
                     print("DonnnnnePP")
                 }else{
                     print("NOOOOPP")
