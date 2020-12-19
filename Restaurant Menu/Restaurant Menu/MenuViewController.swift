@@ -76,8 +76,20 @@ class MenuViewController: UIViewController{
 //        }
     }
     
-    @objc func retry(){
+    func showFailedToDownloadDate(){
         
+        let appearance = SCLAlertView.SCLAppearance(
+            showCloseButton: false
+        )
+        let alertView = SCLAlertView(appearance: appearance)
+
+        alertView.addButton("Retry", target:self, selector:#selector(self.retry))
+        alertView.showError("Failed", subTitle: "Failed to download the menu") // Error
+        
+    }
+    
+    @objc func retry(){
+        getCategoriesData()
     }
     
     func animateLogo(){
@@ -220,6 +232,9 @@ extension MenuViewController{
 
             case .failure(let error):
                 print(error)
+                self.categoriesAPI.removeAll()
+                self.productsAPI.removeAll()
+                self.showFailedToDownloadDate()
             }
 
         }
@@ -271,6 +286,9 @@ extension MenuViewController{
 
             case .failure(let error):
                 print(error)
+                self.categoriesAPI.removeAll()
+                self.productsAPI.removeAll()
+                self.showFailedToDownloadDate()
             }
 
         }
