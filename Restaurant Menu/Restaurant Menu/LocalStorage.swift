@@ -22,7 +22,7 @@ protocol LocalStorageProtocol {
     
     @discardableResult func update(_ block: () -> ()) -> Bool
     @discardableResult func delete<T: Object>(_ object: T) -> Bool
-    
+
     @discardableResult func flush() -> Bool
 }
 

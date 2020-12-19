@@ -28,7 +28,6 @@ class MenuViewController: UIViewController{
     var categoriesAPI = [Category]()
     var productsAPI = [Product]()
     var page = 1
-    var isFirstLaunch = true
     
     var test = UIViewController()
     
@@ -60,11 +59,25 @@ class MenuViewController: UIViewController{
         // set default background color
         view.backgroundColor = backgroundScreenColor
         
-        // show download spinner
-        startSpinner(onView: spinnerView, message: "Downloading menu")
-        self.nextBtn.isUserInteractionEnabled = false
-        self.previousBtn.isUserInteractionEnabled = false
-        getCategoriesData()
+        let isAppFirstLaunch = UserDefaults.standard.bool(forKey: "isAppFirstLaunch")
+        if !isAppFirstLaunch {
+            // show download spinner
+            startSpinner(onView: spinnerView, message: "Downloading menu")
+            self.nextBtn.isUserInteractionEnabled = false
+            self.previousBtn.isUserInteractionEnabled = false
+            getCategoriesData()
+        }else{
+            // show Loading spinner
+            print("EEEEEE")
+            startSpinner(onView: spinnerView, message: "Loading menu")
+//            self.nextBtn.isUserInteractionEnabled = false
+//            self.previousBtn.isUserInteractionEnabled = false
+            self.categoriesAPI = storage.objects()
+            self.productsAPI = storage.objects()
+            print(self.categoriesAPI.count)
+            self.categoriesCollectionView.reloadData()
+            stopSpinner(onView: spinnerView)
+        }
 
 //        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
 //            self.stopSpinner(onView: self.spinnerView)
@@ -108,6 +121,7 @@ class MenuViewController: UIViewController{
         //start animation
         revealingSplashView.startAnimation(){
             print("Completed")
+            //self.storage.delete(products)
             self.setupUI()
 //            let vc = self.storyboard?.instantiateViewController(withIdentifier: "CategoriesViewController") as! CategoriesViewController
 //            self.navigationController?.pushViewController(vc, animated: true)
@@ -118,12 +132,13 @@ class MenuViewController: UIViewController{
 extension MenuViewController: UICollectionViewDataSource, UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         //return categories.count
-        if isFirstLaunch{
+        let isAppFirstLaunch = UserDefaults.standard.bool(forKey: "isAppFirstLaunch")
+        if !isAppFirstLaunch{
             return 0
         }else{
-        var counter = categoriesAPI.count - nextPageIndex * offset
-        counter = (counter > offset ) ? offset : counter
-        return counter
+            var counter = categoriesAPI.count - nextPageIndex * offset
+            counter = (counter > offset ) ? offset : counter
+            return counter
         }
     }
     
@@ -278,13 +293,13 @@ extension MenuViewController{
                 print(self.productsAPI.count)
                 if meta?["current_page"]?.intValue == meta?["last_page"]?.intValue{
                     self.page = 1
-                    self.isFirstLaunch = false
                     self.stopSpinner(onView: self.spinnerView)
                     self.nextBtn.isUserInteractionEnabled = true
                     self.previousBtn.isUserInteractionEnabled = true
                     self.categoriesCollectionView.reloadData()
                     self.storage.write(self.categoriesAPI)
                     self.storage.write(self.productsAPI)
+                    UserDefaults.standard.set(true, forKey: "isAppFirstLaunch")
                     print("DonnnnnePP")
                 }else{
                     print("NOOOOPP")
