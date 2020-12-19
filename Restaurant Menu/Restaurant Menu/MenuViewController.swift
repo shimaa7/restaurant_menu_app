@@ -59,7 +59,8 @@ class MenuViewController: UIViewController{
         
         // show download spinner
         startSpinner(onView: spinnerView, message: "Downloading menu")
-        
+        self.nextBtn.isUserInteractionEnabled = false
+        self.previousBtn.isUserInteractionEnabled = false
         getCategoriesData()
 
 //        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
@@ -276,6 +277,8 @@ extension MenuViewController{
                     self.page = 1
                     self.isFirstLaunch = false
                     self.stopSpinner(onView: self.spinnerView)
+                    self.nextBtn.isUserInteractionEnabled = true
+                    self.previousBtn.isUserInteractionEnabled = true
                     self.categoriesCollectionView.reloadData()
                     print("DonnnnnePP")
                 }else{
