@@ -75,6 +75,11 @@ extension ProductsViewController: UICollectionViewDataSource, UICollectionViewDe
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         var counter = products.count - nextPageIndex * offset
         counter = (counter > offset ) ? offset : counter
+        if (counter == 0) {
+            collectionView.setEmptyMessage("No products found for this category")
+        } else {
+            collectionView.restore()
+        }
         return counter
     }
     
