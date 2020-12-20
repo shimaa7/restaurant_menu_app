@@ -30,20 +30,55 @@ class MenuViewController: UIViewController{
     var productsAPI = [Product]()
     var productsViewModel = [ProductViewModel]()
     var page = 1
-    
-    var test = UIViewController()
-    
+            
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         animateLogo()
-        view.backgroundColor = backgroundScreenColor
-        self.nextBtn.addTarget(self, action: #selector(nextBtnOnClick), for: .touchUpInside)
-        self.previousBtn.addTarget(self, action: #selector(previousBtnOnClick), for: .touchUpInside)
-        //setupUI()
+        setupUI()
+        fetchData()
+        
         
     }
+    func animateLogo(){
+        //initialize a revealing splash with the iconImage, the initial size and the background color
+        let revealingSplashView = RevealingSplashView(iconImage: UIImage(named: "logo1")!,iconInitialSize: CGSize(width: view.frame.width * 0.7, height: view.frame.width * 0.7), backgroundColor: Constants.backgroundScreenColor)
+        
+        revealingSplashView.animationType = SplashAnimationType.woobleAndZoomOut
+
+        //add the revealing splash view as a subview
+        self.view.addSubview(revealingSplashView)
+
+        //start animation
+        revealingSplashView.startAnimation(){
+            print("Completed")
+            //self.storage.delete(products)
+            self.dataHandler()
+//            let vc = self.storyboard?.instantiateViewController(withIdentifier: "CategoriesViewController") as! CategoriesViewController
+//            self.navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+    
+    func setupUI(){
+        view.backgroundColor = Constants.backgroundScreenColor
+        self.nextBtn.addTarget(self, action: #selector(nextBtnOnClick), for: .touchUpInside)
+        self.previousBtn.addTarget(self, action: #selector(previousBtnOnClick), for: .touchUpInside)
+    }
+    
+    fileprivate func fetchData() {
+        
+        Service_URLSession.shared.fetchCategories { (categories, err) in
+            if let err = err {
+                print("Failed to fetch courses:", err)
+                return
+            }
+            print("####",categories?.count)
+            //self.courseViewModels = courses?.map({return CourseViewModel(course: $0)}) ?? []
+            //self.categoriesCollectionView.reloadData()
+        }
+    }
+    
     @objc func nextBtnOnClick(){
         let counter = categoriesAPI.count - nextPageIndex * offset
         if counter > offset {
@@ -51,15 +86,17 @@ class MenuViewController: UIViewController{
         self.categoriesCollectionView.reloadData()
         }
     }
+    
     @objc func previousBtnOnClick(){
         if nextPageIndex - 1 >= 0 {
         nextPageIndex -= 1
         self.categoriesCollectionView.reloadData()
         }
     }
-    func setupUI(){
+    
+    func dataHandler(){
         // set default background color
-        view.backgroundColor = backgroundScreenColor
+        view.backgroundColor = Constants.backgroundScreenColor
         
         let isAppFirstLaunch = UserDefaults.standard.bool(forKey: "isAppFirstLaunch")
         if !isAppFirstLaunch {
@@ -111,25 +148,6 @@ class MenuViewController: UIViewController{
     
     @objc func retry(){
         getCategoriesData()
-    }
-    
-    func animateLogo(){
-        //initialize a revealing splash with the iconImage, the initial size and the background color
-        let revealingSplashView = RevealingSplashView(iconImage: UIImage(named: "logo1")!,iconInitialSize: CGSize(width: view.frame.width * 0.7, height: view.frame.width * 0.7), backgroundColor: backgroundScreenColor)
-        
-        revealingSplashView.animationType = SplashAnimationType.woobleAndZoomOut
-
-        //add the revealing splash view as a subview
-        self.view.addSubview(revealingSplashView)
-
-        //start animation
-        revealingSplashView.startAnimation(){
-            print("Completed")
-            //self.storage.delete(products)
-            self.setupUI()
-//            let vc = self.storyboard?.instantiateViewController(withIdentifier: "CategoriesViewController") as! CategoriesViewController
-//            self.navigationController?.pushViewController(vc, animated: true)
-        }
     }
 }
 
@@ -225,7 +243,7 @@ extension MenuViewController{
               
         let headers: HTTPHeaders = [
             "accept": "application/json",
-            "Authorization": "Bearer \(token)",
+            "Authorization": "Bearer \(Constants.TOKEN)",
         ]
 
         let params: Parameters = [
@@ -279,7 +297,7 @@ extension MenuViewController{
               
         let headers: HTTPHeaders = [
             "accept": "application/json",
-            "Authorization": "Bearer \(token)",
+            "Authorization": "Bearer \(Constants.TOKEN)",
         ]
 
         let params: Parameters = [

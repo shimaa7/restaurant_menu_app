@@ -9,6 +9,7 @@
 import Foundation
 import RealmSwift
 
+// layer for dealing with local storage using Realm
 protocol LocalStorageProtocol {
     func object<T: Object>() -> T?
     func object<T: Object>(_ key: Any?) -> T?

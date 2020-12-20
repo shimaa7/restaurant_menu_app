@@ -13,19 +13,17 @@ class API {
     
     var request: URLRequest
     
-    init(url: String) {
+    init(url: String, page: Int = 1) {
         
-        request = URLRequest(url: URL(string: url)!)
-        if let token = UserDefaults.standard.string(forKey: "token") {
-            request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
-        }
+        request = URLRequest(url: URL(string: url + "?page=\(page)")!)
     }
     
     func get() -> URLRequest{
         
         request.httpMethod = HTTPMethod.get.rawValue
-        request.setValue("application/json; charset=UTF-8", forHTTPHeaderField: "Content-Type")
         request.setValue("application/json", forHTTPHeaderField: "Accept")
+        request.setValue("Bearer \(Constants.TOKEN)", forHTTPHeaderField: "Authorization")
+
         return request
     }
     

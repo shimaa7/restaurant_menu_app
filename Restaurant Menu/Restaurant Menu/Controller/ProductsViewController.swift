@@ -35,7 +35,7 @@ class ProductsViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         // set default background color
-        view.backgroundColor = backgroundScreenColor
+        view.backgroundColor = Constants.backgroundScreenColor
         self.nextBtn.addTarget(self, action: #selector(nextBtnOnClick), for: .touchUpInside)
         self.previousBtn.addTarget(self, action: #selector(previousBtnOnClick), for: .touchUpInside)
         categoryNameLabel.text = categoryName

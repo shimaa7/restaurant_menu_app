@@ -17,5 +17,3 @@ struct CategoryViewModel{
     }
 }
 
-//let categoryViewModel = self.categoriesViewModel[(nextPageIndex * offset) + indexPath.row]
-

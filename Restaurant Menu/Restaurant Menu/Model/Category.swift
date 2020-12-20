@@ -9,7 +9,7 @@
 import Foundation
 import RealmSwift
 
-class Category: Object{
+class Category: Object, Decodable{
     
     @objc dynamic var id: String?
     @objc dynamic var name: String?

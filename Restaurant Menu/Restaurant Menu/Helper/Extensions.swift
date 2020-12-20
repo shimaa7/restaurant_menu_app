@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-// Spinner View startSpinner(onView: UIView), stopSpinner(onView: UIView)
+// spinner View startSpinner(onView: UIView), stopSpinner(onView: UIView)
 extension UIViewController {
         
     func startSpinner(onView : UIView, message: String) {
@@ -44,6 +44,7 @@ extension UIViewController {
     }
 }
 
+// download image from url downloaded(from: String)
 extension UIImageView {
     func downloaded(from url: URL, contentMode mode: UIView.ContentMode = .scaleAspectFit) {
         contentMode = mode
@@ -65,7 +66,7 @@ extension UIImageView {
     }
 }
 
-
+// show empty message when no data found in collection setEmptyMessage(message: String)
 extension UICollectionView {
 
     func setEmptyMessage(_ message: String) {
