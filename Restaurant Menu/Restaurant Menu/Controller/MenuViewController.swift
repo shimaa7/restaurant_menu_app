@@ -31,7 +31,9 @@ class MenuViewController: UIViewController{
     var productsViewModel = [ProductViewModel]()
     var page = 1
     
-    var menuViewModel: MenuViewModel!
+    var menuViewModel = MenuViewModel(categories: [], products: [])
+//    var menuViewModel: MenuViewModel!
+
             
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,13 +64,18 @@ class MenuViewController: UIViewController{
     }
     
     func setupUI(){
+        
+        // set default background color
         view.backgroundColor = Constants.backgroundScreenColor
+        
+        // setup button actions
         self.nextBtn.addTarget(self, action: #selector(nextBtnOnClick), for: .touchUpInside)
         self.previousBtn.addTarget(self, action: #selector(previousBtnOnClick), for: .touchUpInside)
     }
     
     fileprivate func fetchMenuDate(){
-        
+        menuViewModel.menuViewModelDelegate = self
+        menuViewModel.fetchMenu()
     }
     
     fileprivate func fetchData() {
@@ -87,15 +94,15 @@ class MenuViewController: UIViewController{
     @objc func nextBtnOnClick(){
         let counter = categoriesAPI.count - nextPageIndex * offset
         if counter > offset {
-        nextPageIndex += 1
-        self.categoriesCollectionView.reloadData()
+            nextPageIndex += 1
+            self.categoriesCollectionView.reloadData()
         }
     }
     
     @objc func previousBtnOnClick(){
         if nextPageIndex - 1 >= 0 {
-        nextPageIndex -= 1
-        self.categoriesCollectionView.reloadData()
+            nextPageIndex -= 1
+            self.categoriesCollectionView.reloadData()
         }
     }
     
@@ -157,6 +164,7 @@ class MenuViewController: UIViewController{
 }
 
 extension MenuViewController: UICollectionViewDataSource, UICollectionViewDelegate{
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         //return categories.count
         let isAppFirstLaunch = UserDefaults.standard.bool(forKey: "isAppFirstLaunch")
@@ -357,11 +365,13 @@ extension MenuViewController{
 }
 
 extension MenuViewController: MenuViewModelDelegate{
-    func didStartFetchingMenu() {
-        
-    }
     
-    func didFinishFetchingMenu(menu: Menu?) {
+    func didStartFetchingMenu() {
+        print("YEESSSS")
+    }
+
+    func didFinishFetchingMenu() {
+        print("BBBBBBBBBBBBB")
         
     }
     

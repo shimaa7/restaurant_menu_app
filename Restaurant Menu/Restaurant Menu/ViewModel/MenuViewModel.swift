@@ -11,30 +11,43 @@ import Foundation
 protocol MenuViewModelDelegate {
     
     func didStartFetchingMenu()
-    func didFinishFetchingMenu(menu: Menu?)
+    func didFinishFetchingMenu()
 }
 
 class MenuViewModel{
     
-    let categories: [Category]
-    let products: [Product]
+    var categoriesViewModel: [CategoryViewModel]
+    var productsViewModel: [ProductViewModel]
     
     var menuViewModelDelegate: MenuViewModelDelegate?
     
-    init(categories: [Category], products: [Product]){
-        self.categories = categories
-        self.products = products
+    init(categories: [CategoryViewModel], products: [ProductViewModel]){
+        self.categoriesViewModel = categories
+        self.productsViewModel = products
     }
     
-    func fetchProducts(){
+    func fetchMenu(){
         
         menuViewModelDelegate?.didStartFetchingMenu()
         
-        Service_URLSession.shared.fetchProducts(completion: { (products, err) in
+        Service_URLSession.shared.fetchCategories(completion: { (categories, err) in
             
-//            if products != nil{
-//                self.menuViewModelDelegate?.didFinishFetchingMenu(menu: products)
-//            }
+            if categories != nil{
+                print("fetchMenu fetchMenu",categories?.count)
+                self.categoriesViewModel = categories!.map({
+                    return CategoryViewModel(category: $0)
+                })
+                self.menuViewModelDelegate?.didFinishFetchingMenu()
+            }
         })
+        
+//        Service_URLSession.shared.fetchProducts(completion: { (products, err) in
+//
+//            if products != nil{
+//                self.productsViewModel = products!.map({
+//                    return ProductViewModel(product: $0)
+//                })
+//            }
+//        })
     }
 }

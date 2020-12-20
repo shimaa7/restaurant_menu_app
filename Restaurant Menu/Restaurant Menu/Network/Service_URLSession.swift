@@ -32,14 +32,16 @@ class Service_URLSession: NSObject {
             do {
                let res = try JSONDecoder().decode(CategoryResponse.self, from: data)
                 print(res.data.count)
-                if res.meta.current_page == res.meta.last_page{
-                    completion(res.data, err)
-                }else{
-                    self.fetchCategories(page: (res.meta.current_page ?? 0) + 1) { (categories, err) in
-                        print("QQ", categories?.count)
-                        completion(res.data, err)
-                    }
-                }
+
+                completion(res.data, err)
+//                if res.meta.current_page == res.meta.last_page{
+//                    completion(res.data, err)
+//                }else{
+//                    self.fetchCategories(page: (res.meta.current_page ?? 0) + 1) { (categories, err) in
+//                        print("QQ", categories?.count)
+//                        completion(res.data, err)
+//                    }
+//                }
             } catch let error {
                print("Failed to decode:", error)
             }
