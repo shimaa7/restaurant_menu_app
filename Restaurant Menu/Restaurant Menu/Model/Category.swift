@@ -14,14 +14,10 @@ class Category: Object, Decodable{
     @objc dynamic var id: String?
     @objc dynamic var name: String?
     
-    override init() {
-        
-    }
+    override init() {}
     
     init(id: String?, name: String?) {
         self.id = id
         self.name = name
     }
-    
-    
 }

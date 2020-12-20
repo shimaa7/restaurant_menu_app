@@ -8,13 +8,37 @@
 
 import Foundation
 
-struct ProductViewModel: Equatable{
+protocol ProductViewModelDelegate {
+    
+    func didStartFetchingProducts()
+    func didFinishFetchingProducts(products: [Product]?)
+}
+
+class ProductViewModel: Equatable{
     
     let name: String
     let imageURL: String
-        
+    
+    var productViewModelDelegate: ProductViewModelDelegate?
+    
     init(product: Product){
         name = product.name ?? "Product"
         imageURL = product.imageURL ?? ""
+    }
+    
+    static func == (lhs: ProductViewModel, rhs: ProductViewModel) -> Bool {
+        return lhs.name == rhs.name ? lhs.imageURL == rhs.imageURL ? true : false : false
+    }
+    
+    func fetchProducts(){
+        
+        productViewModelDelegate?.didStartFetchingProducts()
+        
+        Service_URLSession.shared.fetchProducts(completion: { (products, err) in
+            
+            if products != nil{
+                self.productViewModelDelegate?.didFinishFetchingProducts(products: products)
+            }
+        })
     }
 }

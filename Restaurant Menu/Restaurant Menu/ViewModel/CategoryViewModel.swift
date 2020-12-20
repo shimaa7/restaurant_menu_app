@@ -8,12 +8,32 @@
 
 import Foundation
 
-struct CategoryViewModel{
+protocol CategoryViewModelDelegate {
+    
+    func didStartFetchingCategories()
+    func didFinishFetchingCategories(categories: [Category]?)
+}
+
+class CategoryViewModel{
     
     let name: String
     
+    var categoriesViewModelDelegate: CategoryViewModelDelegate?
+
     init(category: Category){
         name = category.name ?? "Category"
+    }
+    
+    func fetchCategories(){
+        
+        categoriesViewModelDelegate?.didStartFetchingCategories()
+        
+        Service_URLSession.shared.fetchCategories(completion: { (categories, err) in
+            
+            if categories != nil{
+                self.categoriesViewModelDelegate?.didFinishFetchingCategories(categories: categories)
+            }
+        })
     }
 }
 

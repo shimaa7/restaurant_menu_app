@@ -34,13 +34,21 @@ class ProductsViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        setupUI()
+    }
+    
+    func setupUI(){
+        
         // set default background color
         view.backgroundColor = Constants.backgroundScreenColor
-        self.nextBtn.addTarget(self, action: #selector(nextBtnOnClick), for: .touchUpInside)
-        self.previousBtn.addTarget(self, action: #selector(previousBtnOnClick), for: .touchUpInside)
+        
+        // setup button actions
+        nextBtn.addTarget(self, action: #selector(nextBtnOnClick), for: .touchUpInside)
+        previousBtn.addTarget(self, action: #selector(previousBtnOnClick), for: .touchUpInside)
+        backBtn.addTarget(self, action: #selector(backBtnOnClick), for: .touchUpInside)
+        
         categoryNameLabel.text = categoryName
         
-        backBtn.addTarget(self, action: #selector(backBtnOnClick), for: .touchUpInside)
         let image = UIImage(named: "right_arrow")?.withRenderingMode(.alwaysTemplate)
         backBtn.setImage(image, for: .normal)
         backBtn.imageView?.transform = CGAffineTransform(scaleX: -1, y: 1)
@@ -52,7 +60,9 @@ class ProductsViewController: UIViewController {
         layout.minimumInteritemSpacing = 10
         layout.minimumLineSpacing = 20
         productsCollectionView.collectionViewLayout = layout
+        
     }
+    
     @objc func backBtnOnClick(){
         self.navigationController?.popViewController(animated: true)
     }

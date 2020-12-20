@@ -27,6 +27,8 @@
 		D4A19CB7258E986F005C0EC3 /* Service_URLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A19CB6258E986F005C0EC3 /* Service_URLSession.swift */; };
 		D4A19CBB258EC0CE005C0EC3 /* Service_Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A19CBA258EC0CE005C0EC3 /* Service_Alamofire.swift */; };
 		D4A19CBD258EC19A005C0EC3 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A19CBC258EC19A005C0EC3 /* Response.swift */; };
+		D4A19CC0258FF2D0005C0EC3 /* MenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A19CBF258FF2D0005C0EC3 /* MenuViewModel.swift */; };
+		D4A19CC2258FF312005C0EC3 /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A19CC1258FF312005C0EC3 /* Menu.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,6 +55,8 @@
 		D4A19CB6258E986F005C0EC3 /* Service_URLSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service_URLSession.swift; sourceTree = "<group>"; };
 		D4A19CBA258EC0CE005C0EC3 /* Service_Alamofire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service_Alamofire.swift; sourceTree = "<group>"; };
 		D4A19CBC258EC19A005C0EC3 /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
+		D4A19CBF258FF2D0005C0EC3 /* MenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewModel.swift; sourceTree = "<group>"; };
+		D4A19CC1258FF312005C0EC3 /* Menu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
 		DE9464C02C0D145314DFFF04 /* Pods-Restaurant Menu.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Restaurant Menu.debug.xcconfig"; path = "Target Support Files/Pods-Restaurant Menu/Pods-Restaurant Menu.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -106,29 +110,25 @@
 		D4A19C83258CE373005C0EC3 /* Restaurant Menu */ = {
 			isa = PBXGroup;
 			children = (
-				D4A19CB9258EBF1B005C0EC3 /* Controller */,
-				D4A19CB8258EBEF9005C0EC3 /* View */,
+				D4A19CBE258FE326005C0EC3 /* Supporting Files */,
+				D4A19CAF258E79B3005C0EC3 /* Helper */,
+				D4A19CAE258E79A1005C0EC3 /* Network */,
 				D4A19CB3258E7BC4005C0EC3 /* Model */,
 				D4A19CB0258E7A89005C0EC3 /* ViewModel */,
-				D4A19CAF258E79B3005C0EC3 /* Helper */,
-				D4A19CAE258E79A1005C0EC3 /* Service */,
-				D4A19C84258CE373005C0EC3 /* AppDelegate.swift */,
-				D4A19C86258CE373005C0EC3 /* SceneDelegate.swift */,
-				D4A19C8A258CE373005C0EC3 /* Main.storyboard */,
-				D4A19C8D258CE376005C0EC3 /* Assets.xcassets */,
-				D4A19C92258CE376005C0EC3 /* Info.plist */,
+				D4A19CB8258EBEF9005C0EC3 /* View */,
+				D4A19CB9258EBF1B005C0EC3 /* Controller */,
 			);
 			path = "Restaurant Menu";
 			sourceTree = "<group>";
 		};
-		D4A19CAE258E79A1005C0EC3 /* Service */ = {
+		D4A19CAE258E79A1005C0EC3 /* Network */ = {
 			isa = PBXGroup;
 			children = (
 				D4A19CAA258D61D1005C0EC3 /* API.swift */,
 				D4A19CB6258E986F005C0EC3 /* Service_URLSession.swift */,
 				D4A19CBA258EC0CE005C0EC3 /* Service_Alamofire.swift */,
 			);
-			path = Service;
+			path = Network;
 			sourceTree = "<group>";
 		};
 		D4A19CAF258E79B3005C0EC3 /* Helper */ = {
@@ -144,6 +144,7 @@
 		D4A19CB0258E7A89005C0EC3 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				D4A19CBF258FF2D0005C0EC3 /* MenuViewModel.swift */,
 				D4A19CB1258E7ABB005C0EC3 /* CategoryViewModel.swift */,
 				D4A19CB4258E90A9005C0EC3 /* ProductViewModel.swift */,
 			);
@@ -154,6 +155,7 @@
 			isa = PBXGroup;
 			children = (
 				D4A19CBC258EC19A005C0EC3 /* Response.swift */,
+				D4A19CC1258FF312005C0EC3 /* Menu.swift */,
 				D4A19CA6258D5ECB005C0EC3 /* Category.swift */,
 				D4A19CA8258D606D005C0EC3 /* Product.swift */,
 			);
@@ -176,6 +178,18 @@
 				D4A19CA4258D3E87005C0EC3 /* ProductsViewController.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		D4A19CBE258FE326005C0EC3 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				D4A19C84258CE373005C0EC3 /* AppDelegate.swift */,
+				D4A19C86258CE373005C0EC3 /* SceneDelegate.swift */,
+				D4A19C8A258CE373005C0EC3 /* Main.storyboard */,
+				D4A19C8D258CE376005C0EC3 /* Assets.xcassets */,
+				D4A19C92258CE376005C0EC3 /* Info.plist */,
+			);
+			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -295,6 +309,7 @@
 				D4A19CB5258E90A9005C0EC3 /* ProductViewModel.swift in Sources */,
 				D4A19CAB258D61D1005C0EC3 /* API.swift in Sources */,
 				D4A19CBB258EC0CE005C0EC3 /* Service_Alamofire.swift in Sources */,
+				D4A19CC0258FF2D0005C0EC3 /* MenuViewModel.swift in Sources */,
 				D4A19CBD258EC19A005C0EC3 /* Response.swift in Sources */,
 				D4A19CB7258E986F005C0EC3 /* Service_URLSession.swift in Sources */,
 				D4A19CA3258D3AB7005C0EC3 /* ProductsCollectionViewCell.swift in Sources */,
@@ -302,6 +317,7 @@
 				D4A19CA5258D3E87005C0EC3 /* ProductsViewController.swift in Sources */,
 				D4A19C9F258D1752005C0EC3 /* Extensions.swift in Sources */,
 				D4A19C87258CE373005C0EC3 /* SceneDelegate.swift in Sources */,
+				D4A19CC2258FF312005C0EC3 /* Menu.swift in Sources */,
 				D4A19C9B258D0BBE005C0EC3 /* Constans.swift in Sources */,
 				D4A19CA7258D5ECB005C0EC3 /* Category.swift in Sources */,
 				D4A19CA9258D606D005C0EC3 /* Product.swift in Sources */,
@@ -447,7 +463,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2CACRG3S47;
-				INFOPLIST_FILE = "Restaurant Menu/Info.plist";
+				INFOPLIST_FILE = "Restaurant Menu/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -466,7 +482,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2CACRG3S47;
-				INFOPLIST_FILE = "Restaurant Menu/Info.plist";
+				INFOPLIST_FILE = "Restaurant Menu/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

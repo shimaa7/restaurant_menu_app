@@ -30,6 +30,8 @@ class MenuViewController: UIViewController{
     var productsAPI = [Product]()
     var productsViewModel = [ProductViewModel]()
     var page = 1
+    
+    var menuViewModel: MenuViewModel!
             
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,10 +39,9 @@ class MenuViewController: UIViewController{
         // Do any additional setup after loading the view.
         animateLogo()
         setupUI()
-        fetchData()
-        
-        
+        fetchMenuDate()
     }
+    
     func animateLogo(){
         //initialize a revealing splash with the iconImage, the initial size and the background color
         let revealingSplashView = RevealingSplashView(iconImage: UIImage(named: "logo1")!,iconInitialSize: CGSize(width: view.frame.width * 0.7, height: view.frame.width * 0.7), backgroundColor: Constants.backgroundScreenColor)
@@ -64,6 +65,10 @@ class MenuViewController: UIViewController{
         view.backgroundColor = Constants.backgroundScreenColor
         self.nextBtn.addTarget(self, action: #selector(nextBtnOnClick), for: .touchUpInside)
         self.previousBtn.addTarget(self, action: #selector(previousBtnOnClick), for: .touchUpInside)
+    }
+    
+    fileprivate func fetchMenuDate(){
+        
     }
     
     fileprivate func fetchData() {
@@ -191,6 +196,7 @@ extension MenuViewController: UICollectionViewDataSource, UICollectionViewDelega
     
 }
 extension MenuViewController: ProductSelectionDelegate{
+    
     func selectedProduct(product: Product) {
         let appearance = SCLAlertView.SCLAppearance(
             kTitleFont: UIFont(name: "HelveticaNeue", size: 20)!,
@@ -349,3 +355,15 @@ extension MenuViewController{
         
     }
 }
+
+extension MenuViewController: MenuViewModelDelegate{
+    func didStartFetchingMenu() {
+        
+    }
+    
+    func didFinishFetchingMenu(menu: Menu?) {
+        
+    }
+    
+}
+

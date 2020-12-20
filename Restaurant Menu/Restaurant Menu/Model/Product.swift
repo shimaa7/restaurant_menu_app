@@ -17,9 +17,7 @@ class Product: Object, Decodable{
     @objc dynamic var price: Double = 0
     @objc dynamic var imageURL: String?
     
-    override init() {
-        
-    }
+    override init() {}
     
     init(id: String?, name: String?, categoryID: String?, price: Double, imageURL: String?){
         self.id = id
