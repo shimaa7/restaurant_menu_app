@@ -8,9 +8,15 @@
 
 import Foundation
 
+enum Message: String{
+    
+    case LOADING = "Downloading menu"
+    case DOWNLOADING = "Loading menu"
+}
+
 protocol MenuViewModelDelegate {
     
-    func didStartFetchingMenu()
+    func didStartFetchingMenu(message: String)
     func didFinishFetchingMenu(success: Bool)
 }
 
@@ -29,18 +35,21 @@ class MenuViewModel{
     
     func fetchMenu(){
         
-        // start fetching data
-        menuViewModelDelegate?.didStartFetchingMenu()
-        
         // choose menu data location
         let isAppLaunchedBefore = UserDefaults.standard.bool(forKey: "isAppLaunchedBefore")
         
         if !isAppLaunchedBefore {
             
+            // start fetching data
+            menuViewModelDelegate?.didStartFetchingMenu(message: Message.DOWNLOADING.rawValue)
+            
             // app first launch
             fetchMenuFromAPI()
             
         }else{
+            
+            // start fetching data
+            menuViewModelDelegate?.didStartFetchingMenu(message: Message.LOADING.rawValue)
             
             // app launch before
             fetchMenuFromStorage()

@@ -29,6 +29,7 @@
 		D4A19CBD258EC19A005C0EC3 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A19CBC258EC19A005C0EC3 /* Response.swift */; };
 		D4A19CC0258FF2D0005C0EC3 /* MenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A19CBF258FF2D0005C0EC3 /* MenuViewModel.swift */; };
 		D4A19CC2258FF312005C0EC3 /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A19CC1258FF312005C0EC3 /* Menu.swift */; };
+		D4A19CC42590E2B0005C0EC3 /* Popup.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A19CC32590E2B0005C0EC3 /* Popup.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,6 +58,7 @@
 		D4A19CBC258EC19A005C0EC3 /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
 		D4A19CBF258FF2D0005C0EC3 /* MenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewModel.swift; sourceTree = "<group>"; };
 		D4A19CC1258FF312005C0EC3 /* Menu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
+		D4A19CC32590E2B0005C0EC3 /* Popup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Popup.swift; sourceTree = "<group>"; };
 		DE9464C02C0D145314DFFF04 /* Pods-Restaurant Menu.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Restaurant Menu.debug.xcconfig"; path = "Target Support Files/Pods-Restaurant Menu/Pods-Restaurant Menu.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -137,6 +139,7 @@
 				D4A19C9A258D0BBE005C0EC3 /* Constans.swift */,
 				D4A19C9E258D1752005C0EC3 /* Extensions.swift */,
 				D4A19CAC258DEE71005C0EC3 /* LocalStorage.swift */,
+				D4A19CC32590E2B0005C0EC3 /* Popup.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -313,6 +316,7 @@
 				D4A19CBD258EC19A005C0EC3 /* Response.swift in Sources */,
 				D4A19CB7258E986F005C0EC3 /* Service_URLSession.swift in Sources */,
 				D4A19CA3258D3AB7005C0EC3 /* ProductsCollectionViewCell.swift in Sources */,
+				D4A19CC42590E2B0005C0EC3 /* Popup.swift in Sources */,
 				D4A19C85258CE373005C0EC3 /* AppDelegate.swift in Sources */,
 				D4A19CA5258D3E87005C0EC3 /* ProductsViewController.swift in Sources */,
 				D4A19C9F258D1752005C0EC3 /* Extensions.swift in Sources */,

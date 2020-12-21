@@ -37,7 +37,7 @@ extension UIViewController {
         
     }
     
-    func stopSpinner(onView : UIView) {
+    func hideSpinner(onView : UIView) {
         DispatchQueue.main.async {
             onView.removeFromSuperview()
         }

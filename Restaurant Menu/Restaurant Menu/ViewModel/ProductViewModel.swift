@@ -18,6 +18,7 @@ class ProductViewModel: Equatable{
     
     let name: String
     let imageURL: String
+    let price: Double
     let categoryViewModel: CategoryViewModel
     
     var productViewModelDelegate: ProductViewModelDelegate?
@@ -25,6 +26,7 @@ class ProductViewModel: Equatable{
     init(product: Product){
         name = product.name ?? "Product"
         imageURL = product.imageURL ?? ""
+        price = product.price 
         categoryViewModel = product.category.map({return CategoryViewModel(category: $0)}) ?? CategoryViewModel(category: Category())
     }
     
