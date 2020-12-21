@@ -42,6 +42,14 @@ extension MenuViewController{
         
         // set menu view model delegate
         menuViewModel.menuViewModelDelegate = self
+        
+        // setup collection view layout
+        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        layout.itemSize = CGSize(width: categoriesCollectionView.frame.width, height: categoriesCollectionView.frame.height/5)
+        layout.minimumInteritemSpacing = 10
+        layout.minimumLineSpacing = 20
+        categoriesCollectionView.collectionViewLayout = layout
     }
     
     func showFailedToDownloadData(){

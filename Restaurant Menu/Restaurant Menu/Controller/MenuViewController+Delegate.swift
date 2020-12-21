@@ -55,6 +55,14 @@ extension MenuViewController: UICollectionViewDataSource{
     
 }
 
+//extension MenuViewController: UICollectionViewDelegateFlowLayout {
+//    
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//        
+//        return CGSize(width: categoriesCollectionView.frame.width, height: categoriesCollectionView.frame.height * 0.2)
+//    }
+//}
+
 extension MenuViewController: UICollectionViewDelegate{
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

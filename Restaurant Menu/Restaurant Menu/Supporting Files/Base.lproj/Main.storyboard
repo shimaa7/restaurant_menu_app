@@ -67,13 +67,13 @@
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Category 1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kcX-jH-Jcu">
-                                                            <rect key="frame" x="89" y="19.5" width="232" height="27"/>
+                                                            <rect key="frame" x="70" y="1.5" width="251" height="73"/>
                                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="25"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u5g-XA-ZeD">
-                                                            <rect key="frame" x="87" y="46.5" width="234" height="16.5"/>
+                                                            <rect key="frame" x="68" y="74.5" width="253" height="43.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
@@ -81,7 +81,7 @@
                                                     </subviews>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
-                                                        <constraint firstItem="kcX-jH-Jcu" firstAttribute="height" secondItem="vxB-4o-3rx" secondAttribute="height" multiplier="0.3" id="3mt-Cp-7bw"/>
+                                                        <constraint firstItem="kcX-jH-Jcu" firstAttribute="height" secondItem="vxB-4o-3rx" secondAttribute="height" multiplier="0.8" id="3mt-Cp-7bw"/>
                                                         <constraint firstAttribute="trailing" secondItem="kcX-jH-Jcu" secondAttribute="trailing" constant="8" id="E3w-PB-CA5"/>
                                                         <constraint firstItem="aKP-um-06T" firstAttribute="height" secondItem="vxB-4o-3rx" secondAttribute="height" multiplier="0.15" id="Fwz-qC-HcI"/>
                                                         <constraint firstItem="u5g-XA-ZeD" firstAttribute="height" secondItem="kcX-jH-Jcu" secondAttribute="height" multiplier="0.6" id="QhQ-hw-YLJ"/>
@@ -92,20 +92,22 @@
                                                     </constraints>
                                                 </view>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cutlery" translatesAutoresizingMaskIntoConstraints="NO" id="3SV-B3-CTQ">
-                                                    <rect key="frame" x="18" y="10" width="96" height="96"/>
+                                                    <rect key="frame" x="18" y="24.5" width="77" height="77"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="3SV-B3-CTQ" secondAttribute="height" id="ji8-og-KIV"/>
+                                                    </constraints>
                                                 </imageView>
                                             </subviews>
                                         </view>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="bottom" secondItem="vxB-4o-3rx" secondAttribute="bottom" constant="10" id="4gN-0T-Osg"/>
-                                            <constraint firstAttribute="bottom" secondItem="3SV-B3-CTQ" secondAttribute="bottom" constant="20" id="EAP-n4-Acy"/>
-                                            <constraint firstItem="3SV-B3-CTQ" firstAttribute="top" secondItem="4Up-UH-JIB" secondAttribute="top" constant="10" id="IC5-GH-6bV"/>
+                                            <constraint firstItem="3SV-B3-CTQ" firstAttribute="centerY" secondItem="4Up-UH-JIB" secondAttribute="centerY" id="4qM-XB-ast"/>
                                             <constraint firstItem="u5g-XA-ZeD" firstAttribute="leading" secondItem="3SV-B3-CTQ" secondAttribute="trailing" constant="8" id="J2I-xw-tYb"/>
                                             <constraint firstItem="3SV-B3-CTQ" firstAttribute="leading" secondItem="4Up-UH-JIB" secondAttribute="leadingMargin" constant="10" id="Ktu-Jb-odQ"/>
                                             <constraint firstItem="vxB-4o-3rx" firstAttribute="leading" secondItem="4Up-UH-JIB" secondAttribute="leading" constant="35" id="LaR-GE-h0E"/>
-                                            <constraint firstItem="3SV-B3-CTQ" firstAttribute="width" secondItem="4Up-UH-JIB" secondAttribute="width" multiplier="0.25" id="Q2Z-wI-M60"/>
+                                            <constraint firstItem="3SV-B3-CTQ" firstAttribute="width" secondItem="4Up-UH-JIB" secondAttribute="width" multiplier="0.2" id="Q2Z-wI-M60"/>
                                             <constraint firstItem="vxB-4o-3rx" firstAttribute="top" secondItem="4Up-UH-JIB" secondAttribute="top" constant="25" id="n6Q-4k-PVo"/>
                                             <constraint firstAttribute="trailing" secondItem="vxB-4o-3rx" secondAttribute="trailing" constant="20" id="s0g-iB-Vw7"/>
                                             <constraint firstItem="kcX-jH-Jcu" firstAttribute="leading" secondItem="3SV-B3-CTQ" secondAttribute="trailing" constant="10" id="sbl-mR-7Xs"/>

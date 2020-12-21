@@ -140,5 +140,4 @@ class MenuViewModel{
         return productsViewModel
     }
     
-    
 }
