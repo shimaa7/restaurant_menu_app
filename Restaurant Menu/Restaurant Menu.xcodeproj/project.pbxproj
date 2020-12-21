@@ -13,11 +13,11 @@
 		D4A19C8C258CE373005C0EC3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D4A19C8A258CE373005C0EC3 /* Main.storyboard */; };
 		D4A19C8E258CE376005C0EC3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D4A19C8D258CE376005C0EC3 /* Assets.xcassets */; };
 		D4A19C9B258D0BBE005C0EC3 /* Constans.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A19C9A258D0BBE005C0EC3 /* Constans.swift */; };
-		D4A19C9D258D0F86005C0EC3 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A19C9C258D0F86005C0EC3 /* MenuViewController.swift */; };
+		D4A19C9D258D0F86005C0EC3 /* MenuViewController+Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A19C9C258D0F86005C0EC3 /* MenuViewController+Delegate.swift */; };
 		D4A19C9F258D1752005C0EC3 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A19C9E258D1752005C0EC3 /* Extensions.swift */; };
 		D4A19CA1258D3A84005C0EC3 /* MenuCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A19CA0258D3A84005C0EC3 /* MenuCollectionViewCell.swift */; };
 		D4A19CA3258D3AB7005C0EC3 /* ProductsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A19CA2258D3AB7005C0EC3 /* ProductsCollectionViewCell.swift */; };
-		D4A19CA5258D3E87005C0EC3 /* ProductsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A19CA4258D3E87005C0EC3 /* ProductsViewController.swift */; };
+		D4A19CA5258D3E87005C0EC3 /* ProductsViewController+Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A19CA4258D3E87005C0EC3 /* ProductsViewController+Delegate.swift */; };
 		D4A19CA7258D5ECB005C0EC3 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A19CA6258D5ECB005C0EC3 /* Category.swift */; };
 		D4A19CA9258D606D005C0EC3 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A19CA8258D606D005C0EC3 /* Product.swift */; };
 		D4A19CAB258D61D1005C0EC3 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A19CAA258D61D1005C0EC3 /* API.swift */; };
@@ -30,6 +30,8 @@
 		D4A19CC0258FF2D0005C0EC3 /* MenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A19CBF258FF2D0005C0EC3 /* MenuViewModel.swift */; };
 		D4A19CC2258FF312005C0EC3 /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A19CC1258FF312005C0EC3 /* Menu.swift */; };
 		D4A19CC42590E2B0005C0EC3 /* Popup.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A19CC32590E2B0005C0EC3 /* Popup.swift */; };
+		D4A19CC62591180C005C0EC3 /* MenuViewController+UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A19CC52591180C005C0EC3 /* MenuViewController+UI.swift */; };
+		D4A19CC8259119F2005C0EC3 /* ProductsViewController+UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A19CC7259119F2005C0EC3 /* ProductsViewController+UI.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,11 +44,11 @@
 		D4A19C8D258CE376005C0EC3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D4A19C92258CE376005C0EC3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D4A19C9A258D0BBE005C0EC3 /* Constans.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constans.swift; sourceTree = "<group>"; };
-		D4A19C9C258D0F86005C0EC3 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
+		D4A19C9C258D0F86005C0EC3 /* MenuViewController+Delegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MenuViewController+Delegate.swift"; sourceTree = "<group>"; };
 		D4A19C9E258D1752005C0EC3 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		D4A19CA0258D3A84005C0EC3 /* MenuCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCollectionViewCell.swift; sourceTree = "<group>"; };
 		D4A19CA2258D3AB7005C0EC3 /* ProductsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsCollectionViewCell.swift; sourceTree = "<group>"; };
-		D4A19CA4258D3E87005C0EC3 /* ProductsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsViewController.swift; sourceTree = "<group>"; };
+		D4A19CA4258D3E87005C0EC3 /* ProductsViewController+Delegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProductsViewController+Delegate.swift"; sourceTree = "<group>"; };
 		D4A19CA6258D5ECB005C0EC3 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		D4A19CA8258D606D005C0EC3 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		D4A19CAA258D61D1005C0EC3 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
@@ -59,6 +61,8 @@
 		D4A19CBF258FF2D0005C0EC3 /* MenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewModel.swift; sourceTree = "<group>"; };
 		D4A19CC1258FF312005C0EC3 /* Menu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
 		D4A19CC32590E2B0005C0EC3 /* Popup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Popup.swift; sourceTree = "<group>"; };
+		D4A19CC52591180C005C0EC3 /* MenuViewController+UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MenuViewController+UI.swift"; sourceTree = "<group>"; };
+		D4A19CC7259119F2005C0EC3 /* ProductsViewController+UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProductsViewController+UI.swift"; sourceTree = "<group>"; };
 		DE9464C02C0D145314DFFF04 /* Pods-Restaurant Menu.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Restaurant Menu.debug.xcconfig"; path = "Target Support Files/Pods-Restaurant Menu/Pods-Restaurant Menu.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -177,8 +181,10 @@
 		D4A19CB9258EBF1B005C0EC3 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				D4A19C9C258D0F86005C0EC3 /* MenuViewController.swift */,
-				D4A19CA4258D3E87005C0EC3 /* ProductsViewController.swift */,
+				D4A19C9C258D0F86005C0EC3 /* MenuViewController+Delegate.swift */,
+				D4A19CC52591180C005C0EC3 /* MenuViewController+UI.swift */,
+				D4A19CA4258D3E87005C0EC3 /* ProductsViewController+Delegate.swift */,
+				D4A19CC7259119F2005C0EC3 /* ProductsViewController+UI.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -318,16 +324,18 @@
 				D4A19CA3258D3AB7005C0EC3 /* ProductsCollectionViewCell.swift in Sources */,
 				D4A19CC42590E2B0005C0EC3 /* Popup.swift in Sources */,
 				D4A19C85258CE373005C0EC3 /* AppDelegate.swift in Sources */,
-				D4A19CA5258D3E87005C0EC3 /* ProductsViewController.swift in Sources */,
+				D4A19CA5258D3E87005C0EC3 /* ProductsViewController+Delegate.swift in Sources */,
 				D4A19C9F258D1752005C0EC3 /* Extensions.swift in Sources */,
 				D4A19C87258CE373005C0EC3 /* SceneDelegate.swift in Sources */,
+				D4A19CC8259119F2005C0EC3 /* ProductsViewController+UI.swift in Sources */,
 				D4A19CC2258FF312005C0EC3 /* Menu.swift in Sources */,
 				D4A19C9B258D0BBE005C0EC3 /* Constans.swift in Sources */,
 				D4A19CA7258D5ECB005C0EC3 /* Category.swift in Sources */,
 				D4A19CA9258D606D005C0EC3 /* Product.swift in Sources */,
+				D4A19CC62591180C005C0EC3 /* MenuViewController+UI.swift in Sources */,
 				D4A19CB2258E7ABB005C0EC3 /* CategoryViewModel.swift in Sources */,
 				D4A19CAD258DEE71005C0EC3 /* LocalStorage.swift in Sources */,
-				D4A19C9D258D0F86005C0EC3 /* MenuViewController.swift in Sources */,
+				D4A19C9D258D0F86005C0EC3 /* MenuViewController+Delegate.swift in Sources */,
 				D4A19CA1258D3A84005C0EC3 /* MenuCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
