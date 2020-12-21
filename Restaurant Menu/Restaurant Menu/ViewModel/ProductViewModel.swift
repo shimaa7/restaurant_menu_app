@@ -20,10 +20,12 @@ class ProductViewModel: Equatable{
     let image: String
     let price: Double
     let categoryViewModel: CategoryViewModel
+    let product: Product
     
     var productViewModelDelegate: ProductViewModelDelegate?
     
     init(product: Product){
+        self.product = product
         name = product.name ?? "Product"
         image = product.image ?? ""
         price = product.price

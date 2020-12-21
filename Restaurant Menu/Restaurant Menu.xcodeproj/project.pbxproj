@@ -32,6 +32,7 @@
 		D4A19CC42590E2B0005C0EC3 /* Popup.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A19CC32590E2B0005C0EC3 /* Popup.swift */; };
 		D4A19CC62591180C005C0EC3 /* MenuViewController+UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A19CC52591180C005C0EC3 /* MenuViewController+UI.swift */; };
 		D4A19CC8259119F2005C0EC3 /* ProductsViewController+UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A19CC7259119F2005C0EC3 /* ProductsViewController+UI.swift */; };
+		D4A19CCA259130DC005C0EC3 /* MenuViewModel+API.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A19CC9259130DC005C0EC3 /* MenuViewModel+API.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -63,6 +64,7 @@
 		D4A19CC32590E2B0005C0EC3 /* Popup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Popup.swift; sourceTree = "<group>"; };
 		D4A19CC52591180C005C0EC3 /* MenuViewController+UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MenuViewController+UI.swift"; sourceTree = "<group>"; };
 		D4A19CC7259119F2005C0EC3 /* ProductsViewController+UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProductsViewController+UI.swift"; sourceTree = "<group>"; };
+		D4A19CC9259130DC005C0EC3 /* MenuViewModel+API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MenuViewModel+API.swift"; sourceTree = "<group>"; };
 		DE9464C02C0D145314DFFF04 /* Pods-Restaurant Menu.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Restaurant Menu.debug.xcconfig"; path = "Target Support Files/Pods-Restaurant Menu/Pods-Restaurant Menu.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -152,6 +154,7 @@
 			isa = PBXGroup;
 			children = (
 				D4A19CBF258FF2D0005C0EC3 /* MenuViewModel.swift */,
+				D4A19CC9259130DC005C0EC3 /* MenuViewModel+API.swift */,
 				D4A19CB1258E7ABB005C0EC3 /* CategoryViewModel.swift */,
 				D4A19CB4258E90A9005C0EC3 /* ProductViewModel.swift */,
 			);
@@ -318,6 +321,7 @@
 				D4A19CB5258E90A9005C0EC3 /* ProductViewModel.swift in Sources */,
 				D4A19CAB258D61D1005C0EC3 /* API.swift in Sources */,
 				D4A19CBB258EC0CE005C0EC3 /* Service_Alamofire.swift in Sources */,
+				D4A19CCA259130DC005C0EC3 /* MenuViewModel+API.swift in Sources */,
 				D4A19CC0258FF2D0005C0EC3 /* MenuViewModel.swift in Sources */,
 				D4A19CBD258EC19A005C0EC3 /* Response.swift in Sources */,
 				D4A19CB7258E986F005C0EC3 /* Service_URLSession.swift in Sources */,

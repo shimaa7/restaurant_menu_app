@@ -18,10 +18,12 @@ class CategoryViewModel: Equatable{
     
     let id: String
     let name: String
+    let category: Category
     
     var categoriesViewModelDelegate: CategoryViewModelDelegate?
 
     init(category: Category){
+        self.category = category
         id = category.id ?? ""
         name = category.name ?? "Category"
     }

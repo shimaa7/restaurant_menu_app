@@ -16,7 +16,7 @@ class MenuViewController: UIViewController{
     @IBOutlet weak var nextBtn: UIButton!
     
     let spinnerView = UIView()
-    var menuViewModel = MenuViewModel(categories: [], products: [])
+    var menuViewModel = MenuViewModel(categoriesViewModel: [], productsViewModel: [])
     var nextPageIndex = 0
     
     override func viewDidLoad() {
