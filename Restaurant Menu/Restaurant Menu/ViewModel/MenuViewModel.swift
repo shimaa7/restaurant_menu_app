@@ -11,14 +11,15 @@ import Foundation
 protocol MenuViewModelDelegate {
     
     func didStartFetchingMenu()
-    func didFinishFetchingMenu()
+    func didFinishFetchingMenu(success: Bool)
 }
 
 class MenuViewModel{
     
     var categoriesViewModel: [CategoryViewModel]?
     var productsViewModel: [ProductViewModel]?
-    
+    let storage: LocalStorageProtocol = LocalStorage()
+
     var menuViewModelDelegate: MenuViewModelDelegate?
     
     init(categories: [CategoryViewModel], products: [ProductViewModel]){
@@ -27,6 +28,9 @@ class MenuViewModel{
     }
     
     func fetchMenu(){
+        
+        // start fetching data
+        menuViewModelDelegate?.didStartFetchingMenu()
         
         // choose menu data location
         let isAppLaunchedBefore = UserDefaults.standard.bool(forKey: "isAppLaunchedBefore")
@@ -44,9 +48,6 @@ class MenuViewModel{
     }
     
     func fetchMenuFromAPI(){
-        
-        // start fetching data
-        menuViewModelDelegate?.didStartFetchingMenu()
         
         // GCD to get categories and products in parallel
         let queue = DispatchQueue(label: "fetchMenu", qos: .background, attributes: .concurrent, autoreleaseFrequency: .inherit, target: .global())
@@ -83,13 +84,39 @@ class MenuViewModel{
         
         // notify when get all services data "Menu"
         group.notify(queue: queue) {
-            self.menuViewModelDelegate?.didFinishFetchingMenu()
+            
+            if self.productsViewModel != nil && self.categoriesViewModel != nil {
+                
+                self.menuViewModelDelegate?.didFinishFetchingMenu(success: true)
+                
+            }else{
+                
+                self.menuViewModelDelegate?.didFinishFetchingMenu(success: false)
+            }
         }
         
     }
     
     func fetchMenuFromStorage(){
         
+        // fetch categories and products
+        let categories: [Category] = storage.objects()
+        let products: [Product] = storage.objects()
+        
+        // map models to view models and set data
+        self.categoriesViewModel = categories.map({return CategoryViewModel(category: $0)})
+        self.productsViewModel = products.map({return ProductViewModel(product: $0)})
+        
     }
+    
+    func getProductsForSelectedCategoryViewModel(categoryViewModel: CategoryViewModel) -> [ProductViewModel]?{
+        
+        let productsViewModel = self.productsViewModel?.filter({ (productViewModel) -> Bool in
+            return productViewModel.categoryViewModel == categoryViewModel
+        })
+        
+        return productsViewModel
+    }
+    
     
 }

@@ -98,17 +98,6 @@ class Service_URLSession: NSObject {
                 
                let res = try JSONDecoder().decode(ProductResponse.self, from: data)
                 
-                DispatchQueue.global(qos: .background).async {
-                    
-                    self?.fetchProducts(page: 2) { (products, err) in
-
-                    }
-
-                    DispatchQueue.main.sync { //I don't know what thread you're intending to use, so I picked main :)
-                        completion(result)
-                    }
-                }
-                
                 // GCD to get all categories from different pages
                 let queue = DispatchQueue(label: "fetchProducts", qos: .background, attributes: .concurrent, autoreleaseFrequency: .inherit, target: .global())
                 let group = DispatchGroup()

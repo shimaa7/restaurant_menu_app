@@ -194,10 +194,10 @@ extension MenuViewController: UICollectionViewDataSource, UICollectionViewDelega
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "ProductsViewController") as! ProductsViewController
         vc.delegate = self
         vc.categoryName = categoriesAPI[(nextPageIndex * offset) + indexPath.row].name ?? "Category"
-        vc.products = self.productsAPI.filter({$0.categoryID == categoriesAPI[(nextPageIndex * offset) + indexPath.row].id
+        vc.products = self.productsAPI.filter({$0.category?.id == categoriesAPI[(nextPageIndex * offset) + indexPath.row].id
         })
         self.productsViewModel = self.productsAPI.map({
-            if $0.categoryID == categoriesAPI[(nextPageIndex * offset) + indexPath.row].id{
+            if $0.category?.id == categoriesAPI[(nextPageIndex * offset) + indexPath.row].id{
                 return ProductViewModel(product: $0)
             }else{
                 return ProductViewModel(product: Product())
@@ -338,7 +338,7 @@ extension MenuViewController{
                 
                 for product in data{
                     let category = product["category"].dictionary
-                    self.productsAPI.append(Product(id: product["id"].stringValue, name: product["name"].stringValue, categoryID: category?["id"]?.stringValue, price: product["price"].doubleValue, imageURL: product["image"].stringValue))
+                    self.productsAPI.append(Product(id: product["id"].stringValue, name: product["name"].stringValue, category: Category(id: category?["id"]?.stringValue, name: category?["name"]?.stringValue), price: product["price"].doubleValue, imageURL: product["image"].stringValue))
                 }
                 print(self.productsAPI.count)
                 if meta?["current_page"]?.intValue == meta?["last_page"]?.intValue{
@@ -375,7 +375,7 @@ extension MenuViewController: MenuViewModelDelegate{
         print("YEESSSS")
     }
 
-    func didFinishFetchingMenu() {
+    func didFinishFetchingMenu(success: Bool) {
         print("BBBBBBBBBBBBB", menuViewModel.categoriesViewModel?.count, menuViewModel.productsViewModel?.count)
         
     }

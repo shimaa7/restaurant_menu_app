@@ -14,7 +14,7 @@ protocol CategoryViewModelDelegate {
     func didFinishFetchingCategories(categories: [Category]?)
 }
 
-class CategoryViewModel{
+class CategoryViewModel: Equatable{
     
     let name: String
     
@@ -34,6 +34,10 @@ class CategoryViewModel{
                 self.categoriesViewModelDelegate?.didFinishFetchingCategories(categories: categories)
             }
         })
+    }
+    
+    static func == (lhs: CategoryViewModel, rhs: CategoryViewModel) -> Bool {
+        lhs.name == rhs.name
     }
 }
 

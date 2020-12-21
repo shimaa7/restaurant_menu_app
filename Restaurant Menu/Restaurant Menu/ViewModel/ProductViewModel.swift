@@ -18,12 +18,14 @@ class ProductViewModel: Equatable{
     
     let name: String
     let imageURL: String
+    let categoryViewModel: CategoryViewModel
     
     var productViewModelDelegate: ProductViewModelDelegate?
     
     init(product: Product){
         name = product.name ?? "Product"
         imageURL = product.imageURL ?? ""
+        categoryViewModel = product.category.map({return CategoryViewModel(category: $0)}) ?? CategoryViewModel(category: Category())
     }
     
     static func == (lhs: ProductViewModel, rhs: ProductViewModel) -> Bool {
