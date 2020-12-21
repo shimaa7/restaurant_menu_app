@@ -10,8 +10,8 @@ import Foundation
 
 enum Message: String{
     
-    case LOADING = "Downloading menu"
-    case DOWNLOADING = "Loading menu"
+    case DOWNLOADING = "Downloading menu"
+    case LOADING = "Loading menu"
 }
 
 protocol MenuViewModelDelegate {
@@ -37,13 +37,12 @@ class MenuViewModel{
         
         // choose menu data location
         let isAppLaunchedBefore = UserDefaults.standard.bool(forKey: "isAppLaunchedBefore")
-        print("GGGGG", isAppLaunchedBefore)
 
         if !isAppLaunchedBefore {
 
             // start fetching data
             menuViewModelDelegate?.didStartFetchingMenu(message: Message.DOWNLOADING.rawValue)
-            
+            print("WEB")
             // app first launch
             fetchMenuFromAPI()
             
@@ -51,7 +50,7 @@ class MenuViewModel{
             
             // start fetching data
             menuViewModelDelegate?.didStartFetchingMenu(message: Message.LOADING.rawValue)
-            
+            print("STORAGE")
             // app launch before
             fetchMenuFromStorage()
         }
@@ -85,7 +84,6 @@ class MenuViewModel{
 
                 if products != nil{
                     print("fetchMenummmmmmmmm fetchMenu", products?.count)
-                    print(products?[0].category?.id)
                     self.productsViewModel = products!.map({
                         return ProductViewModel(product: $0)
                     })
@@ -101,7 +99,7 @@ class MenuViewModel{
             {
                 if !self.categoriesViewModel!.isEmpty && !self.productsViewModel!.isEmpty{
                     print("%%%%%%11111")
-                    //UserDefaults.standard.set(true, forKey: "isAppLaunchedBefore")
+//                    UserDefaults.standard.set(true, forKey: "isAppLaunchedBefore")
                     // save data to storage
     //                storage.write(self.categoriesViewModel)
     //                storage.write(self.productsViewModel)
@@ -134,9 +132,7 @@ class MenuViewModel{
     }
     
     func getProductsForSelectedCategoryViewModel(categoryViewModel: CategoryViewModel) -> [ProductViewModel]?{
-        
-        print("BBBBB", categoryViewModel.name)
-        
+                
         let productsViewModel = self.productsViewModel?.filter({ (productViewModel) -> Bool in
             return productViewModel.categoryViewModel == categoryViewModel
         })

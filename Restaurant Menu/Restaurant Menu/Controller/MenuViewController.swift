@@ -167,8 +167,9 @@ extension MenuViewController: MenuViewModelDelegate{
                 self.categoriesCollectionView.reloadData()
             }
         }else{
-            
-            showFailedToDownloadData()
+            DispatchQueue.main.async {
+                self.showFailedToDownloadData()
+            }
         }
 
     }

@@ -18,12 +18,8 @@ class Service_URLSession: NSObject {
         
     func fetchCategories(page: Int = 1, completion: @escaping ([Category]?, Error?) -> ()) {
         
-        //print("&&&&&&&", page)
-
         let request = API(url: Constants.CATEGORIES, page: page).get()
-        
-        print("E####")
-        
+                
         URLSession.shared.dataTask(with: request) { [weak self] (data, resp, err) in
                         
             if let err = err {
@@ -79,9 +75,7 @@ class Service_URLSession: NSObject {
     }
     
     func fetchProducts(page: Int = 1, completion: @escaping ([Product]?, Error?) -> ()) {
-        
-        print("#####", page)
-        
+                
         let request = API(url: Constants.PRODUCTS_CATEGORIES_INCLUDED, page: page).get()
         
         URLSession.shared.dataTask(with: request) { [weak self] (data, resp, err) in
@@ -101,7 +95,7 @@ class Service_URLSession: NSObject {
             do {
                 
                let res = try JSONDecoder().decode(ProductResponse.self, from: data)
-               print(res)
+               //print(res)
                completion(res.data, err)
                 
 //                // GCD to get all categories from different pages
