@@ -26,7 +26,6 @@ class MenuViewController: UIViewController{
 
         animateLogo()
         setupUI()
-
     }
     
     func animateLogo(){
@@ -74,7 +73,8 @@ class MenuViewController: UIViewController{
     }
     
     @objc func nextBtnOnClick(){
-        let counter = (menuViewModel.categoriesViewModel?.count ?? 0) - nextPageIndex * Constants.ITEMS_PER_PAGE
+        
+        let counter = getCounter()
         if counter > Constants.ITEMS_PER_PAGE {
             nextPageIndex += 1
             self.categoriesCollectionView.reloadData()
@@ -82,6 +82,7 @@ class MenuViewController: UIViewController{
     }
     
     @objc func previousBtnOnClick(){
+        
         if nextPageIndex - 1 >= 0 {
             nextPageIndex -= 1
             self.categoriesCollectionView.reloadData()
@@ -91,12 +92,21 @@ class MenuViewController: UIViewController{
     @objc func retryBtnOnClick(){
         menuViewModel.fetchMenu()
     }
+    
+    private func getCounter() -> Int{
+        return (menuViewModel.categoriesViewModel?.count ?? 0) - nextPageIndex * Constants.ITEMS_PER_PAGE
+    }
+    
+    private func getCurrentCellIndex(row: Int) -> Int{
+        return nextPageIndex * Constants.ITEMS_PER_PAGE + row
+    }
 }
 
 extension MenuViewController: UICollectionViewDataSource{
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        var counter = (menuViewModel.categoriesViewModel?.count ?? 0) - nextPageIndex * Constants.ITEMS_PER_PAGE
+        
+        var counter = getCounter()
         counter = (counter > Constants.ITEMS_PER_PAGE ) ? Constants.ITEMS_PER_PAGE : counter
         
         if (counter == 0) {
@@ -109,9 +119,10 @@ extension MenuViewController: UICollectionViewDataSource{
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "categories", for: indexPath) as! MenuCollectionViewCell
 
-        let categoryViewModel = menuViewModel.categoriesViewModel?[(nextPageIndex * Constants.ITEMS_PER_PAGE) + indexPath.row]
+        let categoryViewModel = menuViewModel.categoriesViewModel?[getCurrentCellIndex(row: indexPath.row)]
         cell.categoryViewModel = categoryViewModel
         
         return cell
@@ -124,10 +135,12 @@ extension MenuViewController: UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "ProductsViewController") as! ProductsViewController
         
-        let categoryViewModel = menuViewModel.categoriesViewModel?[(nextPageIndex * Constants.ITEMS_PER_PAGE) + indexPath.row]
+        let categoryViewModel = menuViewModel.categoriesViewModel?[getCurrentCellIndex(row: indexPath.row)]
+        
         vc.selectedProductDelegate = self
         vc.categoryName = categoryViewModel?.name ?? "Category"
         vc.productsViewModel = menuViewModel.getProductsForSelectedCategoryViewModel(categoryViewModel: categoryViewModel ?? CategoryViewModel(category: Category())) ?? [ProductViewModel]()
+        
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }

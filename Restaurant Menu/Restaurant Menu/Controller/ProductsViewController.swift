@@ -66,18 +66,28 @@ class ProductsViewController: UIViewController {
     }
     
     @objc func nextBtnOnClick(){
-        let counter = productsViewModel.count - nextPageIndex * Constants.ITEMS_PER_PAGE
+        
+        let counter = getCounter()
         if counter > Constants.ITEMS_PER_PAGE {
-        nextPageIndex += 1
-        self.productsCollectionView.reloadData()
+            nextPageIndex += 1
+            self.productsCollectionView.reloadData()
         }
     }
     
     @objc func previousBtnOnClick(){
+        
         if nextPageIndex - 1 >= 0 {
-        nextPageIndex -= 1
-        self.productsCollectionView.reloadData()
+            nextPageIndex -= 1
+            self.productsCollectionView.reloadData()
         }
+    }
+    
+    private func getCounter() -> Int{
+        return productsViewModel.count - nextPageIndex * Constants.ITEMS_PER_PAGE
+    }
+    
+    private func getCurrentCellIndex(row: Int) -> Int{
+        return nextPageIndex * Constants.ITEMS_PER_PAGE + row
     }
 
 }
@@ -85,20 +95,24 @@ class ProductsViewController: UIViewController {
 extension ProductsViewController: UICollectionViewDataSource{
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        var counter = productsViewModel.count - nextPageIndex * Constants.ITEMS_PER_PAGE
+        
+        var counter = getCounter()
+        
         counter = (counter > Constants.ITEMS_PER_PAGE ) ? Constants.ITEMS_PER_PAGE : counter
         if (counter == 0) {
             collectionView.setEmptyMessage("No products found for this category")
         } else {
             collectionView.restore()
         }
+        
         return counter
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "products", for: indexPath) as! ProductsCollectionViewCell
 
-        let productViewModel = productsViewModel[(nextPageIndex * Constants.ITEMS_PER_PAGE) + indexPath.row]
+        let productViewModel = productsViewModel[getCurrentCellIndex(row: indexPath.row)]
         cell.productViewModel = productViewModel
         
         return cell
@@ -108,7 +122,9 @@ extension ProductsViewController: UICollectionViewDataSource{
 extension ProductsViewController: UICollectionViewDelegate{
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        self.selectedProductDelegate?.selectedProductViewModel(productViewModel: productsViewModel[(nextPageIndex * Constants.ITEMS_PER_PAGE) + indexPath.row])
+        
+        self.selectedProductDelegate?.selectedProductViewModel(productViewModel: productsViewModel[getCurrentCellIndex(row: indexPath.row)])
+        
         self.navigationController?.popViewController(animated: true)
     }
 }
