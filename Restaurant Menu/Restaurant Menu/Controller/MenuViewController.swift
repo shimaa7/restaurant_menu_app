@@ -26,6 +26,7 @@ class MenuViewController: UIViewController{
 
         animateLogo()
         setupUI()
+
     }
     
     func animateLogo(){
@@ -60,7 +61,7 @@ class MenuViewController: UIViewController{
         menuViewModel.menuViewModelDelegate = self
     }
     
-    func showFailedToDownloadDate(){
+    func showFailedToDownloadData(){
         
         let appearance = SCLAlertView.SCLAppearance(
             showCloseButton: false
@@ -95,23 +96,24 @@ class MenuViewController: UIViewController{
 extension MenuViewController: UICollectionViewDataSource{
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        //return categories.count
-        let isAppFirstLaunch = UserDefaults.standard.bool(forKey: "isAppFirstLaunch")
-        if !isAppFirstLaunch{
-            return 0
-        }else{
-            var counter = (menuViewModel.categoriesViewModel?.count ?? 0) - nextPageIndex * Constants.ITEMS_PER_PAGE
-            counter = (counter > Constants.ITEMS_PER_PAGE ) ? Constants.ITEMS_PER_PAGE : counter
-            return counter
+        var counter = (menuViewModel.categoriesViewModel?.count ?? 0) - nextPageIndex * Constants.ITEMS_PER_PAGE
+        counter = (counter > Constants.ITEMS_PER_PAGE ) ? Constants.ITEMS_PER_PAGE : counter
+        
+        if (counter == 0) {
+            //collectionView.setEmptyMessage("No categories found for this menu")
+        } else {
+            collectionView.restore()
         }
+        
+        return counter
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "categories", for: indexPath) as! MenuCollectionViewCell
-        //cell.backgroundColor = .white
-        //cell.name.text = categoriesAPI[(nextPageIndex * offset) + indexPath.row].name
+
         let categoryViewModel = menuViewModel.categoriesViewModel?[(nextPageIndex * Constants.ITEMS_PER_PAGE) + indexPath.row]
         cell.categoryViewModel = categoryViewModel
+        
         return cell
     }
     
@@ -154,13 +156,19 @@ extension MenuViewController: MenuViewModelDelegate{
         
         // hide download spinner
         hideSpinner(onView: spinnerView)
-        self.nextBtn.isUserInteractionEnabled = true
-        self.previousBtn.isUserInteractionEnabled = true
+        DispatchQueue.main.async {
+            self.nextBtn.isUserInteractionEnabled = true
+            self.previousBtn.isUserInteractionEnabled = true
+        }
         
         if success {
-            self.categoriesCollectionView.reloadData()
+            
+            DispatchQueue.main.async {
+                self.categoriesCollectionView.reloadData()
+            }
         }else{
-            showFailedToDownloadDate()
+            
+            showFailedToDownloadData()
         }
 
     }

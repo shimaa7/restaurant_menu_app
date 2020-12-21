@@ -14,8 +14,11 @@ class API {
     var request: URLRequest
     
     init(url: String, page: Int = 1) {
-        
-        request = URLRequest(url: URL(string: url + "?page=\(page)")!)
+        if url.contains("?"){
+            request = URLRequest(url: URL(string: url + "&page=\(page)")!)
+        }else{
+            request = URLRequest(url: URL(string: url + "?page=\(page)")!)
+        }
     }
     
     func get() -> URLRequest{

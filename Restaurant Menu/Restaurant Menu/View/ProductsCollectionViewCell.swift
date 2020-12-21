@@ -16,7 +16,7 @@ class ProductsCollectionViewCell: UICollectionViewCell {
         didSet{
             backgroundColor = .white
             name.text = productViewModel.name
-            image.downloaded(from: productViewModel.imageURL)
+            image.downloaded(from: productViewModel.image)
         }
     }
     

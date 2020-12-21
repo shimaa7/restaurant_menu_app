@@ -22,11 +22,13 @@ class Service_URLSession: NSObject {
 
         let request = API(url: Constants.CATEGORIES, page: page).get()
         
+        print("E####")
+        
         URLSession.shared.dataTask(with: request) { [weak self] (data, resp, err) in
-            
+                        
             if let err = err {
-                completion(nil, err)
                 print("Failed to fetch categories:", err)
+                completion(nil, err)
                 return
             }
             
@@ -40,37 +42,39 @@ class Service_URLSession: NSObject {
                 
                let res = try JSONDecoder().decode(CategoryResponse.self, from: data)
                 
-                // GCD to get all categories from different pages
-                let queue = DispatchQueue(label: "fetchCategories", qos: .background, attributes: .concurrent, autoreleaseFrequency: .inherit, target: .global())
-                let group = DispatchGroup()
+                completion(res.data, err)
                 
-                queue.async(group: group) {
-                        
-                    if page + 1 <= res.meta.last_page!{
-
-                        for pageNumber in (page + 1)...res.meta.last_page!{
-                            
-                            group.enter()
-                            self?.fetchCategories(page: pageNumber) { (categories, err) in
-                                group.leave()
-                            }
-                        }
-                     }
-                  }
-                    
-                  // notify when get all categories and return
-                  group.notify(queue: queue) {
-                        //print(page, res.data.count)
-                        Service_URLSession.categoriesArr.append(contentsOf: res.data)
-                        Service_URLSession.categoriesArr.sort()
-                        completion(Service_URLSession.categoriesArr, err)
-                   }
+//                // GCD to get all categories from different pages
+//                let queue = DispatchQueue(label: "fetchCategories", qos: .background, attributes: .concurrent, autoreleaseFrequency: .inherit, target: .global())
+//                let group = DispatchGroup()
+//
+//                queue.async(group: group) {
+//
+//                    if page + 1 <= res.meta.last_page!{
+//
+//                        for pageNumber in (page + 1)...res.meta.last_page!{
+//
+//                            group.enter()
+//                            self?.fetchCategories(page: pageNumber) { (categories, err) in
+//                                group.leave()
+//                            }
+//                        }
+//                     }
+//                  }
+//
+//                  // notify when get all categories and return
+//                  group.notify(queue: queue) {
+//                        //print(page, res.data.count)
+//                        Service_URLSession.categoriesArr.append(contentsOf: res.data)
+//                        Service_URLSession.categoriesArr.sort()
+//                        completion(Service_URLSession.categoriesArr, err)
+//                   }
                 
             } catch let error {
                print("Failed to decode:", error)
                completion(nil, error)
             }
-            
+                        
         }.resume()
     }
     
@@ -78,7 +82,7 @@ class Service_URLSession: NSObject {
         
         print("#####", page)
         
-        let request = API(url: Constants.PRODUCTS, page: page).get()
+        let request = API(url: Constants.PRODUCTS_CATEGORIES_INCLUDED, page: page).get()
         
         URLSession.shared.dataTask(with: request) { [weak self] (data, resp, err) in
             
@@ -97,34 +101,36 @@ class Service_URLSession: NSObject {
             do {
                 
                let res = try JSONDecoder().decode(ProductResponse.self, from: data)
+               print(res)
+               completion(res.data, err)
                 
-                // GCD to get all categories from different pages
-                let queue = DispatchQueue(label: "fetchProducts", qos: .background, attributes: .concurrent, autoreleaseFrequency: .inherit, target: .global())
-                let group = DispatchGroup()
-                
-                queue.async(group: group) {
-                    
-                    let last = 5
-                        
-                    if page + 1 <= last{
-
-                        for pageNumber in (page + 1)...last{
-                            
-                            group.enter()
-                            self?.fetchProducts(page: pageNumber) { (_, err) in
-                                group.leave()
-                            }
-                        }
-                     }
-                  }
-                    
-                  // notify when get all categories and return
-                  group.notify(queue: queue) {
-                        //print(page, res.data.count)
-                        Service_URLSession.productsArr.append(contentsOf: res.data)
-                        Service_URLSession.categoriesArr.sort()
-                        completion(Service_URLSession.productsArr, err)
-                   }
+//                // GCD to get all categories from different pages
+//                let queue = DispatchQueue(label: "fetchProducts", qos: .background, attributes: .concurrent, autoreleaseFrequency: .inherit, target: .global())
+//                let group = DispatchGroup()
+//
+//                queue.async(group: group) {
+//
+//                    let last = 5
+//
+//                    if page + 1 <= last{
+//
+//                        for pageNumber in (page + 1)...last{
+//
+//                            group.enter()
+//                            self?.fetchProducts(page: pageNumber) { (_, err) in
+//                                group.leave()
+//                            }
+//                        }
+//                     }
+//                  }
+//
+//                  // notify when get all categories and return
+//                  group.notify(queue: queue) {
+//                        //print(page, res.data.count)
+//                        Service_URLSession.productsArr.append(contentsOf: res.data)
+//                        Service_URLSession.categoriesArr.sort()
+//                        completion(Service_URLSession.productsArr, err)
+//                   }
                 
             } catch let error {
                print("Failed to decode:", error)

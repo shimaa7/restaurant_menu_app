@@ -9,6 +9,7 @@
 import Foundation
 
 struct Menu{
+    
     var categories: [Category]?
     var products: [Product]?
 }

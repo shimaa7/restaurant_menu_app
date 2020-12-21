@@ -17,7 +17,7 @@ protocol ProductViewModelDelegate {
 class ProductViewModel: Equatable{
     
     let name: String
-    let imageURL: String
+    let image: String
     let price: Double
     let categoryViewModel: CategoryViewModel
     
@@ -25,13 +25,13 @@ class ProductViewModel: Equatable{
     
     init(product: Product){
         name = product.name ?? "Product"
-        imageURL = product.imageURL ?? ""
-        price = product.price 
+        image = product.image ?? ""
+        price = product.price
         categoryViewModel = product.category.map({return CategoryViewModel(category: $0)}) ?? CategoryViewModel(category: Category())
     }
     
     static func == (lhs: ProductViewModel, rhs: ProductViewModel) -> Bool {
-        return lhs.name == rhs.name ? lhs.imageURL == rhs.imageURL ? true : false : false
+        return lhs.name == rhs.name ? lhs.image == rhs.image ? true : false : false
     }
     
     func fetchProducts(){

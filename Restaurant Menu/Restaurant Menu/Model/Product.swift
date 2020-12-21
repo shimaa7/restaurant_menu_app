@@ -13,18 +13,18 @@ class Product: Object, Decodable, Comparable{
     
     @objc dynamic var id: String?
     @objc dynamic var name: String?
-    @objc dynamic var category: Category? //category
+    @objc dynamic var category: Category?
     @objc dynamic var price: Double = 0
-    @objc dynamic var imageURL: String?
+    @objc dynamic var image: String?
     
     override init() {}
     
-    init(id: String?, name: String?, category: Category?, price: Double, imageURL: String?){
+    init(id: String?, name: String?, category: Category?, price: Double, image: String?){
         self.id = id
         self.name = name
         self.category = category
         self.price = price
-        self.imageURL = imageURL
+        self.image = image
     }
     
     static func < (lhs: Product, rhs: Product) -> Bool {

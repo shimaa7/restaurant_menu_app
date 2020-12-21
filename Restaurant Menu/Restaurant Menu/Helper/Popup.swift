@@ -28,7 +28,7 @@ func showProductPopup(view: UIView, productViewModel: ProductViewModel){
     // Add product image
     let imageView = UIImageView(frame: CGRect(x: subview.frame.width * 0.4 / 6.5, y: 20, width: subview.frame.width * 0.4, height: subview.frame.width * 0.4))
     imageView.image = #imageLiteral(resourceName: "cutlery")
-    imageView.downloaded(from: productViewModel.imageURL ?? "")
+    imageView.downloaded(from: productViewModel.image)
 
     subview.addSubview(imageView)
     
@@ -49,7 +49,7 @@ func showProductPopup(view: UIView, productViewModel: ProductViewModel){
     // Add the subview to the alert's UI property
     alert.customSubview = subview
     alert.addButton("Done") {
-        print("Logged in")
+        print("dismiss")
     }
 
     alert.showSuccess("", subTitle: "")

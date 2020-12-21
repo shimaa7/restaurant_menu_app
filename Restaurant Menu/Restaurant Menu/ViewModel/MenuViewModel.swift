@@ -37,9 +37,10 @@ class MenuViewModel{
         
         // choose menu data location
         let isAppLaunchedBefore = UserDefaults.standard.bool(forKey: "isAppLaunchedBefore")
-        
+        print("GGGGG", isAppLaunchedBefore)
+
         if !isAppLaunchedBefore {
-            
+
             // start fetching data
             menuViewModelDelegate?.didStartFetchingMenu(message: Message.DOWNLOADING.rawValue)
             
@@ -57,32 +58,34 @@ class MenuViewModel{
     }
     
     func fetchMenuFromAPI(){
-        
+                
         // GCD to get categories and products in parallel
         let queue = DispatchQueue(label: "fetchMenu", qos: .background, attributes: .concurrent, autoreleaseFrequency: .inherit, target: .global())
         let group = DispatchGroup()
         
         queue.async(group: group) {
                     
-//            group.enter()
-//
-//            Service_URLSession.shared.fetchCategories(completion: { [weak self] (categories, err) in
-//                
-//                if categories != nil{
-//                    print("fetchMenu fetchMenu",categories?.count)
-//                    self?.categoriesViewModel = categories!.map({
-//                        return CategoryViewModel(category: $0)
-//                    })
-//                }
-//                group.leave()
-//            })
+            group.enter()
+
+            Service_URLSession.shared.fetchCategories(completion: { [weak self] (categories, err) in
+                
+                if categories != nil{
+                    print("fetchMenu fetchMenu", categories?.count)
+                    self?.categoriesViewModel = categories!.map({
+                        return CategoryViewModel(category: $0)
+                    })
+                }
+                
+                group.leave()
+            })
             
             group.enter()
-            
+
             Service_URLSession.shared.fetchProducts(completion: { (products, err) in
 
                 if products != nil{
-                    print("fetchMenummmmmmmmm fetchMenu",products?.count)
+                    print("fetchMenummmmmmmmm fetchMenu", products?.count)
+                    print(products?[0].category?.id)
                     self.productsViewModel = products!.map({
                         return ProductViewModel(product: $0)
                     })
@@ -94,12 +97,24 @@ class MenuViewModel{
         // notify when get all services data "Menu"
         group.notify(queue: queue) {
             
-            if self.productsViewModel != nil && self.categoriesViewModel != nil {
-                
-                self.menuViewModelDelegate?.didFinishFetchingMenu(success: true)
+            if self.categoriesViewModel != nil && self.productsViewModel != nil
+            {
+                if !self.categoriesViewModel!.isEmpty && !self.productsViewModel!.isEmpty{
+                    print("%%%%%%11111")
+                    //UserDefaults.standard.set(true, forKey: "isAppLaunchedBefore")
+                    // save data to storage
+    //                storage.write(self.categoriesViewModel)
+    //                storage.write(self.productsViewModel)
+                    self.menuViewModelDelegate?.didFinishFetchingMenu(success: true)
+                    
+                }else{
+                    
+                    self.menuViewModelDelegate?.didFinishFetchingMenu(success: false)
+                }
                 
             }else{
                 
+                print("%%%%%%2222")
                 self.menuViewModelDelegate?.didFinishFetchingMenu(success: false)
             }
         }
@@ -119,6 +134,8 @@ class MenuViewModel{
     }
     
     func getProductsForSelectedCategoryViewModel(categoryViewModel: CategoryViewModel) -> [ProductViewModel]?{
+        
+        print("BBBBB", categoryViewModel.name)
         
         let productsViewModel = self.productsViewModel?.filter({ (productViewModel) -> Bool in
             return productViewModel.categoryViewModel == categoryViewModel

@@ -21,6 +21,6 @@ class Constants{
     static var API = SERVER + "v5/"
     static var CATEGORIES = API + "categories"
     static var PRODUCTS = API + "products"
-    static var CATEGORIES_INCLUDED = "&include=category"
+    static var PRODUCTS_CATEGORIES_INCLUDED = PRODUCTS + "?include=category"
 
 }

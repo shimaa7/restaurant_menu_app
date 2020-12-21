@@ -16,11 +16,13 @@ protocol CategoryViewModelDelegate {
 
 class CategoryViewModel: Equatable{
     
+    let id: String
     let name: String
     
     var categoriesViewModelDelegate: CategoryViewModelDelegate?
 
     init(category: Category){
+        id = category.id ?? ""
         name = category.name ?? "Category"
     }
     
@@ -37,7 +39,7 @@ class CategoryViewModel: Equatable{
     }
     
     static func == (lhs: CategoryViewModel, rhs: CategoryViewModel) -> Bool {
-        lhs.name == rhs.name
+        return lhs.id == rhs.id
     }
 }
 
