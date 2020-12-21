@@ -16,8 +16,8 @@ protocol MenuViewModelDelegate {
 
 class MenuViewModel{
     
-    var categoriesViewModel: [CategoryViewModel]
-    var productsViewModel: [ProductViewModel]
+    var categoriesViewModel: [CategoryViewModel]?
+    var productsViewModel: [ProductViewModel]?
     
     var menuViewModelDelegate: MenuViewModelDelegate?
     
@@ -28,26 +28,47 @@ class MenuViewModel{
     
     func fetchMenu(){
         
+        // start fetching data
         menuViewModelDelegate?.didStartFetchingMenu()
         
-        Service_URLSession.shared.fetchCategories(completion: { (categories, err) in
-            
-            if categories != nil{
-                print("fetchMenu fetchMenu",categories?.count)
-                self.categoriesViewModel = categories!.map({
-                    return CategoryViewModel(category: $0)
-                })
-                self.menuViewModelDelegate?.didFinishFetchingMenu()
-            }
-        })
+        // GCD to get categories and products in parallel
+        let queue = DispatchQueue(label: "fetchMenu", qos: .background, attributes: .concurrent, autoreleaseFrequency: .inherit, target: .global())
+        let group = DispatchGroup()
         
-//        Service_URLSession.shared.fetchProducts(completion: { (products, err) in
-//
-//            if products != nil{
-//                self.productsViewModel = products!.map({
-//                    return ProductViewModel(product: $0)
-//                })
-//            }
-//        })
+        queue.async(group: group) {
+                    
+            group.enter()
+
+            Service_URLSession.shared.fetchCategories(completion: { [weak self] (categories, err) in
+                
+                if categories != nil{
+                    print("fetchMenu fetchMenu",categories?.count)
+                    self?.categoriesViewModel = categories!.map({
+                        return CategoryViewModel(category: $0)
+                    })
+                }
+                group.leave()
+            })
+            
+            group.enter()
+            
+            Service_URLSession.shared.fetchProducts(completion: { (products, err) in
+
+                if products != nil{
+                    print("fetchMenummmmmmmmm fetchMenu",products?.count)
+                    self.productsViewModel = products!.map({
+                        return ProductViewModel(product: $0)
+                    })
+                }
+                group.leave()
+            })
+        }
+        
+        // notify when get all services data "Menu"
+        group.notify(queue: queue) {
+            self.menuViewModelDelegate?.didFinishFetchingMenu()
+        }
+        
     }
+    
 }

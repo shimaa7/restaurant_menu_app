@@ -44,6 +44,7 @@ class Service_URLSession: NSObject {
 //                }
             } catch let error {
                print("Failed to decode:", error)
+                completion(nil, error)
             }
             
         }.resume()
@@ -72,6 +73,7 @@ class Service_URLSession: NSObject {
                 completion(res.data, err)
             } catch let error {
                print("Failed to decode:", error)
+               completion(nil, error)
             }
             
         }.resume()
