@@ -23,5 +23,6 @@ struct ProductResponse: Decodable {
 struct Meta: Decodable{
     
     var current_page: Int?
-    var last_page: Int?  
+    var last_page: Int?
+    var total: Int?
 }

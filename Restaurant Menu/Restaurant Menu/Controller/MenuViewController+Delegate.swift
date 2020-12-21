@@ -91,7 +91,6 @@ extension MenuViewController: ProductSelectionDelegate{
 extension MenuViewController: MenuViewModelDelegate{
 
     func didStartFetchingMenu(message: String) {
-        print("YEESSSS")
         
         // show download spinner
         startSpinner(onView: spinnerView, message: message)
@@ -100,7 +99,6 @@ extension MenuViewController: MenuViewModelDelegate{
     }
 
     func didFinishFetchingMenu(success: Bool) {
-        print("BBBBBBBBBBBBB", menuViewModel.categoriesViewModel?.count, menuViewModel.productsViewModel?.count)
         
         // hide download spinner
         hideSpinner(onView: spinnerView)

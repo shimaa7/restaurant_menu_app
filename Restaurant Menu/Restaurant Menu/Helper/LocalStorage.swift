@@ -148,4 +148,11 @@ class LocalStorage: LocalStorageProtocol {
         }
         return false
     }
+    
+    func deleteAll(){
+        let realm = try! Realm()
+        try! realm.write {
+            realm.deleteAll()
+        }
+    }
 }

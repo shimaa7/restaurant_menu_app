@@ -23,7 +23,6 @@ extension MenuViewModel{
             Service_URLSession.shared.fetchCategories(completion: { [weak self] (categories, err) in
                 
                 if categories != nil{
-                    print("fetchMenu fetchMenu", categories?.count)
                     self?.categoriesViewModel = categories!.map({
                         return CategoryViewModel(category: $0)
                     })
@@ -37,7 +36,6 @@ extension MenuViewModel{
             Service_URLSession.shared.fetchProducts(completion: { (products, err) in
 
                 if products != nil{
-                    print("fetchMenummmmmmmmm fetchMenu", products?.count)
                     self.productsViewModel = products!.map({
                         return ProductViewModel(product: $0)
                     })
@@ -48,34 +46,32 @@ extension MenuViewModel{
         
         // notify when get all services data "Menu"
         group.notify(queue: queue) {
-            
+
             if self.categoriesViewModel != nil && self.productsViewModel != nil
             {
                 if !self.categoriesViewModel!.isEmpty && !self.productsViewModel!.isEmpty{
-                    print("%%%%%%11111")
-                    
+
                     let categories: [Category] = self.categoriesViewModel!.map({
                         return $0.category
                     })
                     let products: [Product] = self.productsViewModel!.map({
                         return $0.product
                     })
-                    
+
                     // save data to storage
-//                    self.storage.write(categories)
-//                    self.storage.write(products)
-//                    UserDefaults.standard.set(true, forKey: "isAppLaunchedBefore")
+                    self.storage.write(categories)
+                    self.storage.write(products)
+                    UserDefaults.standard.set(true, forKey: "isAppLaunchedBefore")
 
                     self.menuViewModelDelegate?.didFinishFetchingMenu(success: true)
-                    
+
                 }else{
-                    
+
                     self.menuViewModelDelegate?.didFinishFetchingMenu(success: false)
                 }
-                
+
             }else{
-                
-                print("%%%%%%2222")
+
                 self.menuViewModelDelegate?.didFinishFetchingMenu(success: false)
             }
         }

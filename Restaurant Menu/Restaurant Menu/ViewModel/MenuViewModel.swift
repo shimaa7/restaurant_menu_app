@@ -35,6 +35,8 @@ class MenuViewModel{
     
     func fetchMenu(){
         
+        print(storage.getFileURL())
+        
         // choose menu data location
         let isAppLaunchedBefore = UserDefaults.standard.bool(forKey: "isAppLaunchedBefore")
 
@@ -57,15 +59,15 @@ class MenuViewModel{
     }
     
     func fetchMenuFromStorage(){
-        
+                
         // fetch categories and products
         let categories: [Category] = storage.objects()
         let products: [Product] = storage.objects()
-                
+        
         // map models to view models and set data
         self.categoriesViewModel = categories.map({return CategoryViewModel(category: $0)})
         self.productsViewModel = products.map({return ProductViewModel(product: $0)})
-        
+
         self.menuViewModelDelegate?.didFinishFetchingMenu(success: true)
 
     }
