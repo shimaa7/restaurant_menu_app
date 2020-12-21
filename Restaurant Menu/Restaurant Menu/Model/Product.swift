@@ -9,11 +9,11 @@
 import Foundation
 import RealmSwift
 
-class Product: Object, Decodable{
+class Product: Object, Decodable, Comparable{
     
     @objc dynamic var id: String?
     @objc dynamic var name: String?
-    @objc dynamic var categoryID: String?
+    @objc dynamic var categoryID: String? //category
     @objc dynamic var price: Double = 0
     @objc dynamic var imageURL: String?
     
@@ -25,5 +25,12 @@ class Product: Object, Decodable{
         self.categoryID = categoryID
         self.price = price
         self.imageURL = imageURL
+    }
+    
+    static func < (lhs: Product, rhs: Product) -> Bool {
+        guard let first: String = lhs.name else { return false }
+        guard let second: String = rhs.name else { return true }
+        
+        return first < second
     }
 }

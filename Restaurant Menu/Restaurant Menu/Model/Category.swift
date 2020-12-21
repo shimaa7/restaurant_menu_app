@@ -9,7 +9,7 @@
 import Foundation
 import RealmSwift
 
-class Category: Object, Decodable{
+class Category: Object, Decodable, Comparable{
     
     @objc dynamic var id: String?
     @objc dynamic var name: String?
@@ -19,5 +19,12 @@ class Category: Object, Decodable{
     init(id: String?, name: String?) {
         self.id = id
         self.name = name
+    }
+    
+    static func < (lhs: Category, rhs: Category) -> Bool {
+        guard let first: String = lhs.name else { return false }
+        guard let second: String = rhs.name else { return true }
+        
+        return first < second
     }
 }

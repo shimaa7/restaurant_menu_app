@@ -18,6 +18,7 @@ class Constants{
     static var SERVER = "https://api.foodics.dev/"
     static var API = SERVER + "v5/"
     static var CATEGORIES = API + "categories"
-    static var PRODUCTS = API + "products?include=category"
+    static var PRODUCTS = API + "products"
+    static var CATEGORIES_INCLUDED = "&include=category"
 
 }

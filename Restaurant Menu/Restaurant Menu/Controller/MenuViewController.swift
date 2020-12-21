@@ -34,7 +34,12 @@ class MenuViewController: UIViewController{
     var menuViewModel = MenuViewModel(categories: [], products: [])
 //    var menuViewModel: MenuViewModel!
 
-            
+//    override func viewDidAppear(_ animated: Bool) {
+//
+//         // start fetching data before view loading
+//         fetchMenuDate()
+//    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -371,7 +376,7 @@ extension MenuViewController: MenuViewModelDelegate{
     }
 
     func didFinishFetchingMenu() {
-        print("BBBBBBBBBBBBB")
+        print("BBBBBBBBBBBBB", menuViewModel.categoriesViewModel?.count, menuViewModel.productsViewModel?.count)
         
     }
     
