@@ -28,6 +28,23 @@ class MenuViewModel{
     
     func fetchMenu(){
         
+        // choose menu data location
+        let isAppLaunchedBefore = UserDefaults.standard.bool(forKey: "isAppLaunchedBefore")
+        
+        if !isAppLaunchedBefore {
+            
+            // app first launch
+            fetchMenuFromAPI()
+            
+        }else{
+            
+            // app launch before
+            fetchMenuFromStorage()
+        }
+    }
+    
+    func fetchMenuFromAPI(){
+        
         // start fetching data
         menuViewModelDelegate?.didStartFetchingMenu()
         
@@ -37,18 +54,18 @@ class MenuViewModel{
         
         queue.async(group: group) {
                     
-            group.enter()
-
-            Service_URLSession.shared.fetchCategories(completion: { [weak self] (categories, err) in
-                
-                if categories != nil{
-                    print("fetchMenu fetchMenu",categories?.count)
-                    self?.categoriesViewModel = categories!.map({
-                        return CategoryViewModel(category: $0)
-                    })
-                }
-                group.leave()
-            })
+//            group.enter()
+//
+//            Service_URLSession.shared.fetchCategories(completion: { [weak self] (categories, err) in
+//                
+//                if categories != nil{
+//                    print("fetchMenu fetchMenu",categories?.count)
+//                    self?.categoriesViewModel = categories!.map({
+//                        return CategoryViewModel(category: $0)
+//                    })
+//                }
+//                group.leave()
+//            })
             
             group.enter()
             
@@ -68,6 +85,10 @@ class MenuViewModel{
         group.notify(queue: queue) {
             self.menuViewModelDelegate?.didFinishFetchingMenu()
         }
+        
+    }
+    
+    func fetchMenuFromStorage(){
         
     }
     
