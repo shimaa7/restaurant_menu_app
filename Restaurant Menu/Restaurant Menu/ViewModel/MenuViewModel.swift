@@ -35,7 +35,7 @@ class MenuViewModel{
     
     func fetchMenu(){
         
-        print(storage.getFileURL())
+        //print(storage.getFileURL())
         
         // choose menu data location
         let isAppLaunchedBefore = UserDefaults.standard.bool(forKey: "isAppLaunchedBefore")
@@ -74,7 +74,7 @@ class MenuViewModel{
     }
     
     func getProductsForSelectedCategory(categoryID: String) -> [ProductViewModel]?{
-        print(self.productsViewModel?[0].product.categoryID)
+
         let productsViewModel = self.productsViewModel?.filter({ (productViewModel) -> Bool in
             return productViewModel.product.categoryID == categoryID
         })
