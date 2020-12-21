@@ -7,50 +7,45 @@
 //
 
 import Foundation
-import SCLAlertView
 import UIKit
+import AZDialogView
 
-func showProductPopup(view: UIView, productViewModel: ProductViewModel){
-    
-    let appearance = SCLAlertView.SCLAppearance(
-        kTitleFont: UIFont(name: "HelveticaNeue", size: 20)!,
-        kTextFont: UIFont(name: "HelveticaNeue", size: 14)!,
-        kButtonFont: UIFont(name: "HelveticaNeue-Bold", size: 14)!,
-        showCloseButton: false
-    )
+func showProductPopup(viewController: UIViewController, productViewModel: ProductViewModel){
 
-    // Initialize SCLAlertView using custom Appearance
-    let alert = SCLAlertView(appearance: appearance)
-
-    // Creat the subview
-    let subview = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height * 0.3))
-
-    // Add product image
-    let imageView = UIImageView(frame: CGRect(x: subview.frame.width * 0.4 / 6.5, y: 20, width: subview.frame.width * 0.4, height: subview.frame.width * 0.4))
+    // add product image
+    let imageView = UIImageView(frame: CGRect(x: viewController.view.frame.width * 0.4, y: 20, width: viewController.view.frame.width * 0.4, height: viewController.view.frame.width * 0.4))
     imageView.image = #imageLiteral(resourceName: "cutlery")
     imageView.downloaded(from: productViewModel.image)
 
-    subview.addSubview(imageView)
+    // setup dialog
+    let dialog = AZDialogViewController(title: productViewModel.name, message: "\(productViewModel.price)" + " EGP", widthRatio: 1.0)
+    dialog.customViewSizeRatio = 0.5
     
-    // Add product name
-    let nameLabel = UILabel(frame: CGRect(x: subview.frame.width * 0.4 / 6.5, y: 30 + subview.frame.width * 0.4,width: subview.frame.width * 0.4, height: subview.frame.width * 0.1))
-    nameLabel.text = productViewModel.name
-    nameLabel.textAlignment = .center
-    subview.addSubview(nameLabel)
-    
-    // Add product price
-    let priceLabel = UILabel(frame: CGRect(x: subview.frame.width * 0.4 / 6.5, y: 60 + subview.frame.width * 0.4,width: subview.frame.width * 0.4, height: subview.frame.width * 0.1))
-    priceLabel.text = "\(productViewModel.price) EGP"
-    priceLabel.font = UIFont(name: "HelveticaNeue", size: 15)
-    priceLabel.textColor = .gray
-    priceLabel.textAlignment = .center
-    subview.addSubview(priceLabel)
-    
-    // Add the subview to the alert's UI property
-    alert.customSubview = subview
-    alert.addButton("Done") {
-        print("dismiss")
-    }
+    // add the subviews
+    let container = dialog.container
+    dialog.container.addSubview(imageView)
 
-    alert.showSuccess("", subTitle: "")
+    // add constraints
+    imageView.translatesAutoresizingMaskIntoConstraints = false
+    imageView.centerXAnchor.constraint(equalTo: container.centerXAnchor).isActive = true
+    imageView.centerYAnchor.constraint(equalTo: container.centerYAnchor).isActive = true
+    imageView.heightAnchor.constraint(equalTo: container.heightAnchor).isActive = true
+    imageView.widthAnchor.constraint(equalTo: container.widthAnchor).isActive = true
+
+    // add top image
+    dialog.imageHandler = { (imageView) in
+           imageView.image = UIImage(named: "placeOrder")
+           imageView.contentMode = .scaleToFill
+           return true //must return true, otherwise image won't show.
+    }
+    
+    // add action button
+    dialog.addAction(AZDialogAction(title: "Done") { (dialog) -> (Void) in
+            //add your actions here.
+            dialog.dismiss()
+    })
+    
+    // show dialog
+    viewController.present(dialog, animated: false, completion: nil)
+
 }

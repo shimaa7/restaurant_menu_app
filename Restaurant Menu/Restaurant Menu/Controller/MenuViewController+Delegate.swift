@@ -81,7 +81,9 @@ extension MenuViewController: UICollectionViewDelegate{
 extension MenuViewController: ProductSelectionDelegate{
     
     func selectedProductViewModel(productViewModel: ProductViewModel) {
-        showProductPopup(view: self.view, productViewModel: productViewModel)
+        
+        self.navigationController?.popViewController(animated: true)
+        showProductPopup(viewController: self, productViewModel: productViewModel)
     }
     
 }
