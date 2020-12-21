@@ -40,7 +40,6 @@ class Service_URLSession: NSObject {
                 DispatchQueue.main.async {
                     
                     Service_URLSession.categoriesArr.append(contentsOf: res.data)
-
                 }
                 
                 // GCD to get all categories from different pages
@@ -76,7 +75,7 @@ class Service_URLSession: NSObject {
                                    let res = try JSONDecoder().decode(CategoryResponse.self, from: data)
                                     
                                     Service_URLSession.categoriesArr.append(contentsOf: res.data)
-                                    
+
                                     group.leave()
                                     
                                 } catch let error {
@@ -90,7 +89,7 @@ class Service_URLSession: NSObject {
                   }
                 
                 group.notify(queue: queue){
-                    
+
                     if res.meta.total == Service_URLSession.categoriesArr.count{
                         completion(Service_URLSession.categoriesArr, err)
                     }else{

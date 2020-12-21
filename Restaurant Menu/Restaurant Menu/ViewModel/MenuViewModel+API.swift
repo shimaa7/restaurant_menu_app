@@ -21,7 +21,6 @@ extension MenuViewModel{
             group.enter()
 
             Service_URLSession.shared.fetchCategories(completion: { [weak self] (categories, err) in
-                
                 if categories != nil{
                     self?.categoriesViewModel = categories!.map({
                         return CategoryViewModel(category: $0)
