@@ -26,6 +26,7 @@ protocol LocalStorageProtocol {
 
     @discardableResult func flush() -> Bool
     @discardableResult func getFileURL() -> URL
+    func deleteAll()
 
 }
 

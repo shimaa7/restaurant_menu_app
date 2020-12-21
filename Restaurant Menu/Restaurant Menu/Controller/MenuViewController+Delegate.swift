@@ -69,10 +69,9 @@ extension MenuViewController: UICollectionViewDelegate{
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "ProductsViewController") as! ProductsViewController
         
         let categoryViewModel = menuViewModel.categoriesViewModel?[getCurrentCellIndex(row: indexPath.row)]
-        
         vc.selectedProductDelegate = self
         vc.categoryName = categoryViewModel?.name ?? "Category"
-        vc.productsViewModel = menuViewModel.getProductsForSelectedCategoryViewModel(categoryViewModel: categoryViewModel ?? CategoryViewModel(category: Category())) ?? [ProductViewModel]()
+        vc.productsViewModel = menuViewModel.getProductsForSelectedCategory(categoryID: categoryViewModel?.id ?? "") ?? [ProductViewModel]()
         
         self.navigationController?.pushViewController(vc, animated: true)
     }

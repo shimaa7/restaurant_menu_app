@@ -36,6 +36,7 @@ extension MenuViewModel{
 
                 if products != nil{
                     self.productsViewModel = products!.map({
+                        $0.categoryID = $0.category?.id ?? ""
                         return ProductViewModel(product: $0)
                     })
                 }
@@ -56,10 +57,12 @@ extension MenuViewModel{
                     let products: [Product] = self.productsViewModel!.map({
                         return $0.product
                     })
-
+                    
                     // save data to storage
-                    self.storage.write(categories)
-                    self.storage.write(products)
+                    DispatchQueue.main.async {
+                        self.storage.write(categories)
+                        self.storage.write(products)
+                    }
                     UserDefaults.standard.set(true, forKey: "isAppLaunchedBefore")
 
                     self.menuViewModelDelegate?.didFinishFetchingMenu(success: true)

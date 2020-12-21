@@ -13,11 +13,21 @@ class Product: Object, Decodable, Comparable{
     
     @objc dynamic var id: String?
     @objc dynamic var name: String?
-    @objc dynamic var category: Category?
+    @objc dynamic var categoryID: String = ""
     @objc dynamic var price: Double = 0
     @objc dynamic var image: String?
+    var category: Category?
     
-    override init() {}
+    enum CodingKeys: String, CodingKey {
+        case id
+        case name
+        case category
+        case price
+        case image
+    }
+    
+    override init() {
+    }
     
     init(id: String?, name: String?, category: Category?, price: Double, image: String?){
         self.id = id
@@ -25,6 +35,7 @@ class Product: Object, Decodable, Comparable{
         self.category = category
         self.price = price
         self.image = image
+        self.categoryID = category?.id ?? ""
     }
     
     static func < (lhs: Product, rhs: Product) -> Bool {

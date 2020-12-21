@@ -47,6 +47,7 @@ class MenuViewModel{
 
             // app first launch
             fetchMenuFromAPI()
+            storage.deleteAll()
             
         }else{
             
@@ -63,7 +64,7 @@ class MenuViewModel{
         // fetch categories and products
         let categories: [Category] = storage.objects()
         let products: [Product] = storage.objects()
-
+                        
         // map models to view models and set data
         self.categoriesViewModel = categories.map({return CategoryViewModel(category: $0)})
         self.productsViewModel = products.map({return ProductViewModel(product: $0)})
@@ -72,10 +73,10 @@ class MenuViewModel{
 
     }
     
-    func getProductsForSelectedCategoryViewModel(categoryViewModel: CategoryViewModel) -> [ProductViewModel]?{
-                
+    func getProductsForSelectedCategory(categoryID: String) -> [ProductViewModel]?{
+        print(self.productsViewModel?[0].product.categoryID)
         let productsViewModel = self.productsViewModel?.filter({ (productViewModel) -> Bool in
-            return productViewModel.categoryViewModel == categoryViewModel
+            return productViewModel.product.categoryID == categoryID
         })
         
         return productsViewModel
